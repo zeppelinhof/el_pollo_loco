@@ -13,6 +13,18 @@ class DrawableObject {
         this.img.src = path;
     }
 
+    /**
+     * 
+     * @param {Array} arr - ['img/image1', 'img/image2', ...]
+     */
+    loadImages(arr) {
+        arr.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
+        });
+    }
+
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
@@ -25,17 +37,5 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-    }
-
-    /**
-     * 
-     * @param {Array} arr - ['img/image1', 'img/image2', ...]
-     */
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
     }
 }
