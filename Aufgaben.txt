@@ -1,0 +1,11 @@
+Aufgaben:
+✔ Start-Screen
+• Kollision der Flaschen
+• Coins einsammeln
+• Flaschen einsammeln
+• Flaschen nur werfen, wenn sie vorhanden sind
+• Endgegner besiegen
+• Game-Over Screen
+• Musik, Sounds
+• Fullscreen-Modus (canvas.requestFullscreen)
+• Erklärung der Spieltasten für Spieler

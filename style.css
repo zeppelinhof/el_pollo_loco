@@ -1,0 +1,42 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('img/desert-game-background.jpg');
+    background-position: center;
+    margin: 0;
+    height: 100vh;
+}
+
+h1{
+    font-family: 'Arbutus'; 
+    font-size: 48px;
+    color:saddlebrown;
+}
+
+canvas{
+    background-color: black;    
+}
+
+.game-button{
+    cursor: pointer;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    padding: 24px;
+    font-family: 'Arbutus'; 
+}
+
+.button-panel{
+    display: flex;
+    gap: 12px;
+}
+
+.game-button:hover{
+    box-shadow: 0 8px 0 rgba(0 0 0 / 15%);
+}
+
+.black-background{
+    background-color: black;
+    color: white;    
+}
