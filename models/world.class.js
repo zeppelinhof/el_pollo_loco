@@ -33,9 +33,9 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy)
-                console.log('Energie:', this.character.energy);
-            }
+                this.statusBar.setPercentage(this.character.energy);
+
+            }            
         });
     }
 

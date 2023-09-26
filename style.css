@@ -33,10 +33,14 @@ canvas{
 }
 
 .game-button:hover{
-    box-shadow: 0 8px 0 rgba(0 0 0 / 15%);
+    box-shadow: 0 0 8px 8px rgba(0 0 0 / 20%);
 }
 
 .black-background{
-    background-color: black;
+    background-color: rgb(30, 30, 30);
     color: white;    
+}
+
+.black-background:hover{
+    background-color: black;
 }
