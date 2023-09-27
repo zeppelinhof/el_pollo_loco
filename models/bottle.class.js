@@ -26,9 +26,9 @@ class Bottle extends ThrowableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_ROTATING);
             this.checkCollisions();
-        }, 80);
+        }, 180);
 
-       
+
     }
 
     checkCollisions() {
@@ -40,4 +40,12 @@ class Bottle extends ThrowableObject {
             }
         });
     }
+
+    playAnimationSplash(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
 }
