@@ -16,7 +16,7 @@ class MovableObject extends DrawableObject {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 5);
+        }, 1000 / 25);
     }
 
     isAboveGround() {
@@ -60,14 +60,7 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.energy == 0;
-    }
-
-    playAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    }
+    }    
 
     moveRight() {
         // Body Movement Animation

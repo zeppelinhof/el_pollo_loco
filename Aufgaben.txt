@@ -1,6 +1,6 @@
 Aufgaben:
 ✔ Start-Screen
-• Kollision der Flaschen
+✔ Kollision der Flaschen
 • Coins einsammeln
 • Flaschen einsammeln
 • Flaschen nur werfen, wenn sie vorhanden sind
