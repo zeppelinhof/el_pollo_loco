@@ -6,9 +6,10 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    statusBarLive = new StatusBarLive();
     throwableObjects = [];
     collectableObjects = [];
+    collectedBottlesCount = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -25,25 +26,42 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
+            this.checkCollisionsWithEnemy();
             this.checkThrowObjects();
-        }, 200);
+            this.checkCollisionsWithCollectableObject();
+        }, 100);
     }
 
-    checkCollisions() {
+    checkCollisionsWithEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                this.statusBarLive.setPercentage(this.character.energy);
 
-            }            
+            }
         });
     }
 
-    checkThrowObjects(){
+    checkCollisionsWithCollectableObject() {  // Pepe collects Coin or Bottle
+        let colObj = level1.collectableObjects;
+        this.level.collectableObjects.forEach((co) => {
+            if (this.character.isColliding(co)) {                
+                if (colObj[colObj.indexOf(co)].constructor.name == 'BottleCollectable') {
+                    this.collectedBottlesCount++;
+                }
+                colObj.splice(colObj.indexOf(co), 1);
+            }
+        });
+    }
+
+    checkThrowObjects() {
         if (this.keyboard.D) {
-            let bottle = new Bottle(this.character.x + 100, this.character.y + 100)
-            this.throwableObjects.push(bottle);
+            if (this.collectedBottlesCount > 0) {
+                let bottle = new Bottle(this.character.x + 100, this.character.y + 100);
+                this.throwableObjects.push(bottle);
+                this.collectedBottlesCount--;
+            }
+
         }
     }
 
@@ -56,7 +74,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); // back
         // space for fixed objects
-        this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarLive);
         this.ctx.translate(this.camera_x, 0); // forwards
 
 

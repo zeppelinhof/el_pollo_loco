@@ -3,7 +3,7 @@ class DrawableObject {
     x = 120;
     y = 300;
     height = 150;
-    width = 100;       
+    width = 100;
     img;
     imageCache = {};
     currentImage = 0;
@@ -44,5 +44,9 @@ class DrawableObject {
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }    
+
+    randomPosition(startPoint) {
+        return startPoint + Math.random() * (new Level().level_end_x);
     }
 }
