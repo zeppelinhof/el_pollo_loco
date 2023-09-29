@@ -7,9 +7,12 @@ class World {
     keyboard;
     camera_x = 0;
     statusBarLive = new StatusBarLive();
+    statusBarBottles = new StatusBarBottles();
+    statusBarCoins = new StatusBarCoins();
     throwableObjects = [];
     collectableObjects = [];
     collectedBottlesCount = 0;
+    collectedCoinsCount = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -46,10 +49,17 @@ class World {
         let colObj = level1.collectableObjects;
         this.level.collectableObjects.forEach((co) => {
             if (this.character.isColliding(co)) {                
-                if (colObj[colObj.indexOf(co)].constructor.name == 'BottleCollectable') {
+                if(colObj[colObj.indexOf(co)].constructor.name == 'BottleCollectable') {                    
                     this.collectedBottlesCount++;
+                    this.statusBarBottles.setPercentage(this.collectedBottlesCount);
+                    colObj.splice(colObj.indexOf(co), 1);
+                } 
+                else if(colObj[colObj.indexOf(co)].constructor.name == 'Coin'){
+                    this.collectedCoinsCount++;
+                    this.statusBarCoins.setPercentage(this.collectedCoinsCount);
+                    colObj.splice(colObj.indexOf(co), 1);
                 }
-                colObj.splice(colObj.indexOf(co), 1);
+                
             }
         });
     }
@@ -60,6 +70,7 @@ class World {
                 let bottle = new Bottle(this.character.x + 100, this.character.y + 100);
                 this.throwableObjects.push(bottle);
                 this.collectedBottlesCount--;
+                this.statusBarBottles.setPercentage(this.collectedBottlesCount);
             }
 
         }
@@ -75,6 +86,8 @@ class World {
         this.ctx.translate(-this.camera_x, 0); // back
         // space for fixed objects
         this.addToMap(this.statusBarLive);
+        this.addToMap(this.statusBarBottles);
+        this.addToMap(this.statusBarCoins);
         this.ctx.translate(this.camera_x, 0); // forwards
 
 

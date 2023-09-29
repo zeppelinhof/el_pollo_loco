@@ -2,9 +2,9 @@ class StatusBar extends DrawableObject {
 
     percentage = 100;
 
-    // constructor() {
-    //     super();        
-    // }    
+    constructor() {
+        super();      
+    }    
 
 
     resolveImageIndex() {
