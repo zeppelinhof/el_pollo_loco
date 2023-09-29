@@ -49,12 +49,12 @@ class World {
         let colObj = level1.collectableObjects;
         this.level.collectableObjects.forEach((co) => {
             if (this.character.isColliding(co)) {                
-                if(colObj[colObj.indexOf(co)].constructor.name == 'BottleCollectable') {                    
+                if(this.typeOfCollectableObjectIs('BottleCollectable', colObj, co)) {                    
                     this.collectedBottlesCount++;
                     this.statusBarBottles.setPercentage(this.collectedBottlesCount);
                     colObj.splice(colObj.indexOf(co), 1);
                 } 
-                else if(colObj[colObj.indexOf(co)].constructor.name == 'Coin'){
+                else if(this.typeOfCollectableObjectIs('Coin', colObj, co)){
                     this.collectedCoinsCount++;
                     this.statusBarCoins.setPercentage(this.collectedCoinsCount);
                     colObj.splice(colObj.indexOf(co), 1);
@@ -62,6 +62,10 @@ class World {
                 
             }
         });
+    }
+
+    typeOfCollectableObjectIs(collObjName, colObj, co){
+        return colObj[colObj.indexOf(co)].constructor.name == collObjName;
     }
 
     checkThrowObjects() {
@@ -80,9 +84,9 @@ class World {
         // diese Funktion nur für Zeichnen auf Canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.translate(this.camera_x, 0); // back
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
+        this.addObjectsToMap(this.level.clouds);
         this.ctx.translate(-this.camera_x, 0); // back
         // space for fixed objects
         this.addToMap(this.statusBarLive);
@@ -91,8 +95,7 @@ class World {
         this.ctx.translate(this.camera_x, 0); // forwards
 
 
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.clouds);
+        this.addToMap(this.character);        
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.collectableObjects);

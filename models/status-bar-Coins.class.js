@@ -20,20 +20,20 @@ class StatusBarCoins extends StatusBar {
     }
 
     setPercentage(percentage) {
-        this.percentage = percentage;
+        this.percentage = percentage/countCoins;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
 
     resolveImageIndex() {
-        if (this.percentage > 4) {
+        if (this.percentage > 0.8) {
             return 5;
-        } else if (this.percentage > 3) {
+        } else if (this.percentage > 0.6) {
             return 4;
-        } else if (this.percentage > 2) {
+        } else if (this.percentage > 0.4) {
             return 3;
-        } else if (this.percentage > 1) {
+        } else if (this.percentage > 0.2) {
             return 2;
         } else if (this.percentage > 0) {
             return 1;
