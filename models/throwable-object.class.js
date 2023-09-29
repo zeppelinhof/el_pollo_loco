@@ -3,6 +3,13 @@ class ThrowableObject extends MovableObject {
     speedY = 30;
     speedX = 20;
 
+    offset = {
+        top: 20,
+        left: 20,
+        right: 20,
+        bottom: 20
+    }
+
     constructor(x, y) {
         super();
         this.x = x;

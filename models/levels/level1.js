@@ -1,7 +1,7 @@
 let level1;
 let countCoins = 3;
 let countBottles = 5;
-let countChicken = 0;
+let countChicken = 5;
 let countCloud = 4;
 
 function initLevel() {

@@ -15,10 +15,11 @@ class Bottle extends ThrowableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
 
-    constructor(x, y) {
+    constructor(x, y, world) {
         super(x, y).loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.IMAGES_ROTATING);
         this.loadImages(this.IMAGES_SPLASH);
+        this.world = world;
         this.animate();
     }
 
@@ -32,8 +33,10 @@ class Bottle extends ThrowableObject {
     }
 
     checkCollisions() {
-        level1.enemies.forEach((enemy) => {
+        this.world.level.enemies.forEach((enemy) => {
             if (this.isColliding(enemy)) {
+                this.world.jumpOnEnemy(enemy, false); // Throw bottle same effect like jump on enemy -> dead
+                this.speedY = 10;
                 setInterval(() => {
                     this.playAnimation(this.IMAGES_SPLASH);
                 }, 180);
