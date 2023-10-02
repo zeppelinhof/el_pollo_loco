@@ -1,4 +1,8 @@
 class Bottle extends ThrowableObject {
+
+    isSplashed = false;
+    enemyHit;
+
     IMAGES_ROTATING = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -25,30 +29,25 @@ class Bottle extends ThrowableObject {
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_ROTATING);
-            this.checkCollisions();
+            if (!this.isSplashed) {
+                this.playAnimation(this.IMAGES_ROTATING);
+                this.checkCollision_Bottle_Enemy();
+            } else {
+                this.world.jumpOnEnemy(this.enemyHit, false); // Throw bottle same effect like jump on enemy -> dead                
+                this.playAnimation(this.IMAGES_SPLASH);
+            }
         }, 180);
 
 
     }
 
-    checkCollisions() {
+    checkCollision_Bottle_Enemy() {
         this.world.level.enemies.forEach((enemy) => {
             if (this.isColliding(enemy)) {
-                this.world.jumpOnEnemy(enemy, false); // Throw bottle same effect like jump on enemy -> dead
+                this.isSplashed = true;
                 this.speedY = 10;
-                setInterval(() => {
-                    this.playAnimation(this.IMAGES_SPLASH);
-                }, 180);
+                this.enemyHit = enemy;
             }
         });
     }
-
-    playAnimationSplash(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    }
-
 }
