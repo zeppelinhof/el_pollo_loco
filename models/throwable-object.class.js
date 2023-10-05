@@ -2,6 +2,7 @@ class ThrowableObject extends MovableObject {
 
     speedY = 30;
     speedX = 20;
+    enemyStillOnScreen = true;
 
     offset = {
         top: 20,
@@ -23,7 +24,7 @@ class ThrowableObject extends MovableObject {
     throw() {
         this.speedY = 30;
         this.applyGravity();
-        setInterval(() => {
+        setGeneralInterval(() => {
             this.x += 5;
         }, 25);
     }

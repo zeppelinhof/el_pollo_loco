@@ -1,6 +1,34 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let generalIntervalIds = [];
+let bottleSplashIds = [];
+
+function setGeneralInterval(fn, time){
+    let id = setInterval(fn, time);
+    generalIntervalIds.push(id);
+}
+
+function setSpecialInterval(fn, time, intervalId){
+    let id = setInterval(fn, time);
+    if (intervalId == 'bottleSplash') {
+        bottleSplashIds.push(id);
+    }    
+}
+
+function stopSpecialInterval(intervalId){
+    if (intervalId == 'bottleSplash') {
+        bottleSplashIds.forEach(clearInterval);
+    } else {
+
+    }
+    
+}
+
+function stopGame(){
+    generalIntervalIds.forEach(clearInterval);
+    bottleSplashIds.forEach(clearInterval);
+}
 
 function initGame() {
     document.getElementById('gameScreen').innerHTML = /*html*/`

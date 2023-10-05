@@ -28,7 +28,7 @@ class World {
     }
 
     run() {
-        setInterval(() => {
+        setGeneralInterval(() => {
             this.checkThrowObjects();
             this.checkCollisionsWithEnemy();
             this.checkCollisionsWithCollectableObject();
@@ -48,12 +48,13 @@ class World {
         });
     }
 
-    jumpOnEnemy(enemy, realJump) {  // Pepe jumps on Enemy
+    jumpOnEnemy(enemyHit, realJump) {  // Pepe jumps on Enemy
         let enemyObj = level1.enemies;
         if(realJump){
             this.character.speedY = 10;
         }
-        enemyObj.splice(enemyObj.indexOf(enemy), 1);        
+        this.level.enemies.push(new ChickenDead(enemyHit.x));
+        enemyObj.splice(enemyObj.indexOf(enemyHit), 1);        
     }
 
     checkCollisionsWithCollectableObject() {  // Pepe collects Coin or Bottle

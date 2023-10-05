@@ -23,7 +23,7 @@ class Endboss extends MovableObject {
     }
 
     adnimate() {
-        setInterval(() => {
+        setGeneralInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 150);
     }

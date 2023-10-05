@@ -62,7 +62,7 @@ class Character extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        let affe = setGeneralInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -80,7 +80,7 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        setInterval(() => {
+        setGeneralInterval(() => {
 
             if(this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);

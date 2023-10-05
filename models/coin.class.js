@@ -16,7 +16,7 @@ class Coin extends CollectableObject {
 
 
     animate() {
-        setInterval(() => {
+        setGeneralInterval(() => {
             this.playAnimation(this.IMAGES_COINS);
         }, 150);
     }

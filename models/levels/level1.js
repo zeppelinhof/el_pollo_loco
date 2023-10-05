@@ -10,7 +10,8 @@ function initLevel() {
     for (let index = 0; index < countChicken; index++) {
         let chicken = new Chicken();
         enemiesArray[index] = chicken;
-    } enemiesArray.push(new Endboss());
+    } 
+    enemiesArray.push(new Endboss());
 
     let cloudsArray = new Array(countCloud);
     for (let index = 0; index < countCloud; index++) {
