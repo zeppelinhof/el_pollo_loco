@@ -3,6 +3,9 @@ let world;
 let keyboard = new Keyboard();
 let generalIntervalIds = [];
 let bottleSplashIds = [];
+let enbossAnimation = [];
+let enbossHurtedAnimation = [];
+let endbossExploding = [];
 
 function setGeneralInterval(fn, time){
     let id = setInterval(fn, time);
@@ -13,16 +16,29 @@ function setSpecialInterval(fn, time, intervalId){
     let id = setInterval(fn, time);
     if (intervalId == 'bottleSplash') {
         bottleSplashIds.push(id);
-    }    
+    }  
+    else if(intervalId == 'enbossAnimation') {
+        enbossAnimation.push(id);
+    } 
+
+    else if (intervalId == 'enbossHurtedAnimation'){
+        enbossHurtedAnimation.push(id);
+    }
+    else if (intervalId == 'endbossExploding'){
+        endbossExploding.push(id);
+    }
 }
 
 function stopSpecialInterval(intervalId){
     if (intervalId == 'bottleSplash') {
         bottleSplashIds.forEach(clearInterval);
-    } else {
-
+    } else if (intervalId == 'enbossAnimation'){
+        enbossAnimation.forEach(clearInterval);
+    } else if (intervalId == 'enbossHurtedAnimation'){
+        enbossHurtedAnimation.forEach(clearInterval);
+    } else if (intervalId == 'endbossExploding'){
+        endbossExploding.forEach(clearInterval);
     }
-    
 }
 
 function stopGame(){

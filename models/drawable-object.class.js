@@ -30,7 +30,7 @@ class DrawableObject {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         }
         catch(e){
-            console.log('Die Source:', this.src);
+            console.log('Die Source:', this.img);
         }
     }
 

@@ -61,8 +61,8 @@ class MovableObject extends DrawableObject {
 
 
 
-    hit() {
-        this.energy -= 5;
+    hit(amountOfDamage) {
+        this.energy -= amountOfDamage;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -91,5 +91,12 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 30;
+    }
+
+    fallDownwards() {
+        setGeneralInterval(() => {
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+        }, 1000 / 25);
     }
 }

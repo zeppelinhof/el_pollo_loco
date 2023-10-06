@@ -21,11 +21,4 @@ class ChickenDead extends MovableObject {
             this.playAnimation(this.IMAGE_DEAD);
         }, 150, 'chickenDead');
     }
-
-    fallDownwards() {
-        setGeneralInterval(() => {
-            this.y -= this.speedY;
-            this.speedY -= this.acceleration;
-        }, 1000 / 25);
-    }
 }

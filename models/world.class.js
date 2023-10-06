@@ -41,32 +41,38 @@ class World {
                 this.jumpOnEnemy(enemy, true);
             }
             else if (this.character.isColliding(enemy)) {
-                this.character.hit();
+                this.character.hit(5);
                 this.statusBarLive.setPercentage(this.character.energy);
-
             }
         });
     }
 
     jumpOnEnemy(enemyHit, realJump) {  // Pepe jumps on Enemy
         let enemyObj = level1.enemies;
-        if(realJump){
+        if (realJump) {
             this.character.speedY = 10;
         }
-        this.level.enemies.push(new ChickenDead(enemyHit.x));
-        enemyObj.splice(enemyObj.indexOf(enemyHit), 1);        
+        if (this.typeOfObjectIs('Chicken', enemyObj, enemyHit)) {
+            this.level.enemies.push(new ChickenDead(enemyHit.x));
+            enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
+        }
+        else if (this.typeOfObjectIs('Endboss', enemyObj, enemyHit)) {
+            enemyHit.hit(30);
+            // enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
+        }
+
     }
 
     checkCollisionsWithCollectableObject() {  // Pepe collects Coin or Bottle
         let colObj = level1.collectableObjects;
         this.level.collectableObjects.forEach((co) => {
             if (this.character.isColliding(co)) {
-                if (this.typeOfCollectableObjectIs('BottleCollectable', colObj, co)) {
+                if (this.typeOfObjectIs('BottleCollectable', colObj, co)) {
                     this.collectedBottlesCount++;
                     this.statusBarBottles.setPercentage(this.collectedBottlesCount);
                     colObj.splice(colObj.indexOf(co), 1);
                 }
-                else if (this.typeOfCollectableObjectIs('Coin', colObj, co)) {
+                else if (this.typeOfObjectIs('Coin', colObj, co)) {
                     this.collectedCoinsCount++;
                     this.statusBarCoins.setPercentage(this.collectedCoinsCount);
                     colObj.splice(colObj.indexOf(co), 1);
@@ -76,8 +82,8 @@ class World {
         });
     }
 
-    typeOfCollectableObjectIs(collObjName, colObj, co) {
-        return colObj[colObj.indexOf(co)].constructor.name == collObjName;
+    typeOfObjectIs(objName, obj, o) {
+        return obj[obj.indexOf(o)].constructor.name == objName;
     }
 
     checkThrowObjects() {
