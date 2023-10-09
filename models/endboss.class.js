@@ -3,8 +3,12 @@ class Endboss extends MovableObject {
     height = 400;
     width = 300;
     y = 60;
+    startMovement = false;
     animationExplodingStopActivated = false;
     animationHurtStopActivated = false;
+    animationNearerStopActivated = false;
+    animationAttackStopActivated = false;
+    currentImage = 0;
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -61,10 +65,11 @@ class Endboss extends MovableObject {
         setSpecialInterval(() => {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                if (!animationHurtStopActivated) {
+                this.startMovement = true
+                if (!this.animationHurtStopActivated) {
                     setTimeout(() => {
                         stopSpecialInterval('enbossHurtedAnimation');
-                        animationHurtStopActivated = true;
+                        this.animationHurtStopActivated = true;
                     }, 1000);
                 }
             } if (this.isDead()) {
@@ -73,10 +78,42 @@ class Endboss extends MovableObject {
             }
             else if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_ALERT);
+                if (!this.animationNearerStopActivated && this.startMovement) {
+                    this.animationNearerStopActivated = true;
+                    setTimeout(() => {
+                        this.attack();
+                    }, 1000);
+                }
             }
 
-        }, 150, 'enbossAnimation');
+        }, 250, 'enbossAnimation');
 
+    }
+
+    attack() {
+        stopSpecialInterval('enbossAnimation');
+        this.playAnimation(this.IMAGES_ATTACK);
+
+
+        if (this.runInterval(this.animationAttackStopActivated)) {
+            this.animationAttackStopActivated = true;
+            setTimeout(() => {
+                stopSpecialInterval('endbossAttack');
+                this.animationAttackStopActivated = false
+                this.animationNearerStopActivated = false;
+            }, 2000);
+        }
+
+        this.comeNearer();
+        this.animateWalk();
+    }
+
+    runInterval(interval) {
+        return !interval;
+    }
+
+    comeNearer() {
+        this.x -= 50;
     }
 
     exploding() {
@@ -91,29 +128,4 @@ class Endboss extends MovableObject {
             }
         }, 350, 'endbossExploding');
     }
-
-
-
-
-    //         else if (this.isHurt()) {
-    //     setSpecialInterval(() => {
-    //         setTimeout(() => {
-    //             this.animate();
-    //         }, 2000);
-    //         this.playAnimation(this.IMAGES_HURT);
-    //         if (!animationStopActivated) {
-    //             setTimeout(() => {
-    //                 stopSpecialInterval('enbossHurtedAnimation');
-    //                 animationStopActivated = true;
-    //             }, 1000);
-    //         }
-    //     }, 200, 'enbossHurtedAnimation');
-
-    // }
-
-
-
 }
-
-
-

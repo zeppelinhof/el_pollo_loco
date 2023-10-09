@@ -6,6 +6,7 @@ let bottleSplashIds = [];
 let enbossAnimation = [];
 let enbossHurtedAnimation = [];
 let endbossExploding = [];
+let endbossAttack = [];
 
 function setGeneralInterval(fn, time){
     let id = setInterval(fn, time);
@@ -27,6 +28,9 @@ function setSpecialInterval(fn, time, intervalId){
     else if (intervalId == 'endbossExploding'){
         endbossExploding.push(id);
     }
+    else if (intervalId == 'endbossAttack'){
+        endbossAttack.push(id);
+    }
 }
 
 function stopSpecialInterval(intervalId){
@@ -38,6 +42,8 @@ function stopSpecialInterval(intervalId){
         enbossHurtedAnimation.forEach(clearInterval);
     } else if (intervalId == 'endbossExploding'){
         endbossExploding.forEach(clearInterval);
+    } else if (intervalId == 'endbossAttack'){
+        endbossAttack.forEach(clearInterval);
     }
 }
 
