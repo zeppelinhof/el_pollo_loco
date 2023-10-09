@@ -10,6 +10,7 @@ class Coin extends CollectableObject {
         this.loadImages(this.IMAGES_COINS);
 
         this.x = this.randomPosition(200);
+        this.y = this.randomPositionY(10);
         
         this.animate();
     }

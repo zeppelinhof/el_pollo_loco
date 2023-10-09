@@ -54,4 +54,8 @@ class DrawableObject {
     randomPosition(startPoint) {
         return startPoint + Math.random() * (new Level().level_end_x);
     }
+
+    randomPositionY(startPointY) {
+        return startPointY + Math.random() * 300;
+    }
 }

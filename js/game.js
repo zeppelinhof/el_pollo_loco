@@ -2,52 +2,33 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let generalIntervalIds = [];
+let activeEndboss = [];
+let idleEndboss = [];
+let chickenMoveLeft = [];
+let chickenDead = [];
+let chickenWalk = [];
 let bottleSplashIds = [];
-let enbossAnimation = [];
+let bottleSplash = [];
+let alert = [];
 let enbossHurtedAnimation = [];
 let endbossExploding = [];
 let endbossAttack = [];
 
-function setGeneralInterval(fn, time){
+function setGeneralInterval(fn, time) {
     let id = setInterval(fn, time);
     generalIntervalIds.push(id);
 }
 
-function setSpecialInterval(fn, time, intervalId){
+function setSpecialInterval(fn, time, interval) {
     let id = setInterval(fn, time);
-    if (intervalId == 'bottleSplash') {
-        bottleSplashIds.push(id);
-    }  
-    else if(intervalId == 'enbossAnimation') {
-        enbossAnimation.push(id);
-    } 
-
-    else if (intervalId == 'enbossHurtedAnimation'){
-        enbossHurtedAnimation.push(id);
-    }
-    else if (intervalId == 'endbossExploding'){
-        endbossExploding.push(id);
-    }
-    else if (intervalId == 'endbossAttack'){
-        endbossAttack.push(id);
-    }
+    interval.push(id);
 }
 
-function stopSpecialInterval(intervalId){
-    if (intervalId == 'bottleSplash') {
-        bottleSplashIds.forEach(clearInterval);
-    } else if (intervalId == 'enbossAnimation'){
-        enbossAnimation.forEach(clearInterval);
-    } else if (intervalId == 'enbossHurtedAnimation'){
-        enbossHurtedAnimation.forEach(clearInterval);
-    } else if (intervalId == 'endbossExploding'){
-        endbossExploding.forEach(clearInterval);
-    } else if (intervalId == 'endbossAttack'){
-        endbossAttack.forEach(clearInterval);
-    }
+function stopSpecialInterval(interval) {
+    interval.forEach(clearInterval);
 }
 
-function stopGame(){
+function stopGame() {
     generalIntervalIds.forEach(clearInterval);
     bottleSplashIds.forEach(clearInterval);
 }

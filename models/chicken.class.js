@@ -20,10 +20,10 @@ class Chicken extends MovableObject {
     animate() {
         setSpecialInterval(() => {
             this.moveLeft();
-        }, 1000 / 60, 'chickenMoveLeft');
+        }, 1000 / 60, chickenMoveLeft);
 
         setSpecialInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
-        }, 150, 'chickenWalk');         // wo wird jumpOEnemy verwendet dort nach 3 Sek
+        }, 150, chickenWalk);
     }
 }

@@ -42,12 +42,12 @@ class Bottle extends ThrowableObject {
                 this.playAnimation(this.IMAGES_SPLASH);
                 if (!this.timeoutSplashOn) {
                     setTimeout(() => {
-                        stopSpecialInterval('bottleSplash');
+                        stopSpecialInterval(bottleSplash);
                     }, 500);
                     this.timeoutSplashOn = true;
                 }
             }
-        }, 80, 'bottleSplash');
+        }, 80, bottleSplash);
     }
 
 

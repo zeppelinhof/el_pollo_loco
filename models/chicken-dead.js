@@ -19,6 +19,6 @@ class ChickenDead extends MovableObject {
     animate() {
         setSpecialInterval(() => {
             this.playAnimation(this.IMAGE_DEAD);
-        }, 150, 'chickenDead');
+        }, 150, chickenDead);
     }
 }

@@ -6,9 +6,13 @@ class Endboss extends MovableObject {
     startMovement = false;
     animationExplodingStopActivated = false;
     animationHurtStopActivated = false;
+    animationAlertStopActivated = false;
     animationNearerStopActivated = false;
     animationAttackStopActivated = false;
     currentImage = 0;
+    alerted = true;
+    attacking = false;
+    hurted = false;
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -53,79 +57,113 @@ class Endboss extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
+        this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
         this.x = new Level().level_end_x + 100;  // this.world.level.level_end_x   new Level().level_end_x 
-        this.animateWalk();
+        this.idleEndboss();
     }
 
-    animateWalk() {
+    idleEndboss() {
         setSpecialInterval(() => {
+            this.playAnimation(this.IMAGES_ALERT);
             if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                this.startMovement = true
-                if (!this.animationHurtStopActivated) {
-                    setTimeout(() => {
-                        stopSpecialInterval('enbossHurtedAnimation');
-                        this.animationHurtStopActivated = true;
-                    }, 1000);
-                }
-            } if (this.isDead()) {
-                stopSpecialInterval('enbossAnimation')
+                this.activeEndboss();
+                stopSpecialInterval(idleEndboss);
+            }
+        }, 200, idleEndboss);
+    }
+
+    activeEndboss() {
+        setSpecialInterval(() => {
+            if (this.alerted) {
+                this.alert();
+            }
+            if (this.attacking) {
+                this.attack();
+            }
+            if (this.isHurt()) {
+                this.hurt();
+            }
+
+            if (this.isDead()) {
+                this.nextAnimation_Dead();
                 this.exploding();
             }
-            else if (!this.isDead()) {
-                this.playAnimation(this.IMAGES_ALERT);
-                if (!this.animationNearerStopActivated && this.startMovement) {
-                    this.animationNearerStopActivated = true;
-                    setTimeout(() => {
-                        this.attack();
-                    }, 1000);
-                }
-            }
+        }, 200, activeEndboss);
+    }
 
-        }, 250, 'enbossAnimation');
-
+    alert() {
+        this.playAnimation(this.IMAGES_ALERT);
+        if (!this.animationAlertStopActivated) {
+            setTimeout(() => {
+                this.nextAnimation_Attacking();
+                this.switchAnimation_Alert_Attack(false, true)
+            }, 1000);
+        }
     }
 
     attack() {
-        stopSpecialInterval('enbossAnimation');
         this.playAnimation(this.IMAGES_ATTACK);
-
-
-        if (this.runInterval(this.animationAttackStopActivated)) {
-            this.animationAttackStopActivated = true;
+        if (!this.animationAttackStopActivated) {
             setTimeout(() => {
-                stopSpecialInterval('endbossAttack');
-                this.animationAttackStopActivated = false
-                this.animationNearerStopActivated = false;
-            }, 2000);
+                this.nextAnimation_Alerted();
+                this.switchAnimation_Alert_Attack(true, false)
+                this.comeNearer(20);
+            }, 500);
         }
-
-        this.comeNearer();
-        this.animateWalk();
     }
 
-    runInterval(interval) {
-        return !interval;
+    switchAnimation_Alert_Attack(boolFirst, boolSecond) {
+        this.animationAttackStopActivated = boolFirst;
+        this.animationAlertStopActivated = boolSecond;
     }
 
-    comeNearer() {
-        this.x -= 50;
+    hurt() {
+        this.playAnimation(this.IMAGES_HURT);
+        setSpecialInterval(() => {
+            if (!this.animationHurtStopActivated) {
+                this.nextAnimation_Alerted();
+                this.animationHurtStopActivated = true;
+                this.switchAnimation_Alert_Attack(false, false)
+            }
+        }, 200, enbossHurtedAnimation);
+    }
+
+    comeNearer(speed) {
+        if (!this.isDead()) {
+            this.x -= speed;
+        }
+    }
+
+    nextAnimation_Attacking() {
+        this.attacking = true;
+        this.alerted = false;
+        this.hurted = false;
+    }
+
+    nextAnimation_Alerted() {
+        this.alerted = true;
+        this.attacking = false;
+        this.hurted = false;
+    }
+
+    nextAnimation_Dead() {
+        this.alerted = false;
+        this.attacking = false;
+        this.hurted = false;
     }
 
     exploding() {
-        setSpecialInterval(() => {
-            this.playAnimation(this.IMAGES_DEAD);
-            if (!this.animationExplodingStopActivated) {
-                this.animationExplodingStopActivated = true;
-                setTimeout(() => {
-                    stopSpecialInterval('endbossExploding');
-                    this.fallDownwards();
-                }, 2000);
-            }
-        }, 350, 'endbossExploding');
+        this.playAnimation(this.IMAGES_DEAD);
+        if (!this.animationExplodingStopActivated) {
+            this.animationExplodingStopActivated = true;
+            setTimeout(() => {
+                stopSpecialInterval(endbossExploding);
+                this.fallDownwards();
+            }, 2000);
+        }
     }
 }
