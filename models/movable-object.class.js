@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
-    lastHit = 0;     
+    lastHit = 0;
 
     offset = {
         top: 0,
@@ -32,7 +32,7 @@ class MovableObject extends DrawableObject {
         }
 
     }
-    
+
     // isColliding(mo) {
     //     return this.x + this.width > mo.x &&  // Rechts nach links ("hat Pepes rechte Seite die Linke Seite von Chicken überschritten?")
     //         this.y + this.height > mo.y &&
@@ -42,8 +42,8 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-            this.y + this.height -this.offset.bottom > mo.y +mo.offset.top &&
-            this.x +this.offset.left < mo.x + mo.width -mo.offset.right &&
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
@@ -78,7 +78,7 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.energy == 0;
-    }    
+    }
 
     moveRight() {
         // Body Movement Animation

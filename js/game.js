@@ -6,6 +6,8 @@ let activeEndboss = [];
 let idleEndboss = [];
 let chickenMoveLeft = [];
 let chickenDead = [];
+let chick = [];
+let chickDead = [];
 let chickenWalk = [];
 let bottleSplashIds = [];
 let bottleSplash = [];
@@ -61,27 +63,54 @@ function initStartscreen() {
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
+        resetTimer();
     }
     if (e.keyCode == 37) {
         keyboard.LEFT = true;
+        resetTimer();
     }
     if (e.keyCode == 38) {
         keyboard.UP = true;
+        resetTimer();
     }
     if (e.keyCode == 40) {
         keyboard.DOWN = true;
+        resetTimer();
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
+        resetTimer();                  
     }
 
     if (e.keyCode == 68) {
         keyboard.D = true;
+        resetTimer(); 
     }
 
 });
 
+function resetTimer(){
+    clearTimeout(this.keyTimerIdle);
+    clearTimeout(this.keyTimerLongidle);
+    keyboard.idle = false;
+    keyboard.longidle = false;
+}
+
 window.addEventListener("keyup", (e) => {
+
+    resetTimer();
+
+    keyTimerIdle = setTimeout(() => {
+        keyboard.longidle = false;
+        keyboard.idle = true;
+    }, 100);
+
+    keyTimerLongidle = setTimeout(() => {
+        keyboard.idle = false;
+        keyboard.longidle = true;
+    }, 7000);
+
+
     if (e.keyCode == 39) {
         keyboard.RIGHT = false;
     }
@@ -97,9 +126,7 @@ window.addEventListener("keyup", (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
     }
-
     if (e.keyCode == 68) {
         keyboard.D = false;
     }
-
 });

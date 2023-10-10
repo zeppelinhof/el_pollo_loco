@@ -1,11 +1,14 @@
 Aufgaben:
 ✔ Start-Screen
 ✔ Kollision der Flaschen
-• Coins einsammeln
-• Flaschen einsammeln
-• Flaschen nur werfen, wenn sie vorhanden sind
-• Endgegner besiegen
+✔ Coins einsammeln
+✔ Flaschen einsammeln
+✔ Flaschen nur werfen, wenn sie vorhanden sind
+✔ Endgegner besiegen
+
+✔ Idle
 • Game-Over Screen
+• Übersicht Punkte
 • Musik, Sounds
 • Fullscreen-Modus (canvas.requestFullscreen)
 • Erklärung der Spieltasten für Spieler

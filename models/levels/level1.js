@@ -2,6 +2,7 @@ let level1;
 let countCoins = 3;
 let countBottles = 5;
 let countChicken = 5;
+let countChick = 5;
 let countCloud = 4;
 
 function initLevel() {
@@ -11,6 +12,12 @@ function initLevel() {
         let chicken = new Chicken();
         enemiesArray[index] = chicken;
     } 
+
+    for (let index = countChicken; index < countChicken + countChick; index++) {
+        let chick = new Chick();
+        enemiesArray[index] = chick;
+    }
+
     enemiesArray.push(new Endboss());
 
     let cloudsArray = new Array(countCloud);

@@ -56,6 +56,12 @@ class World {
             this.level.enemies.push(new ChickenDead(enemyHit.x));
             enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
         }
+
+        if (this.typeOfObjectIs('Chick', enemyObj, enemyHit)) {
+            this.level.enemies.push(new ChickDead(enemyHit.x));
+            enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
+        }
+
         else if (this.typeOfObjectIs('Endboss', enemyObj, enemyHit)) {
             enemyHit.hit(30);
             // enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
@@ -83,7 +89,12 @@ class World {
     }
 
     typeOfObjectIs(objName, obj, o) {
-        return obj[obj.indexOf(o)].constructor.name == objName;
+        try{
+            return obj[obj.indexOf(o)].constructor.name == objName;
+        }
+        catch{
+            console.log("kein constructor.name");
+        }
     }
 
     checkThrowObjects() {
