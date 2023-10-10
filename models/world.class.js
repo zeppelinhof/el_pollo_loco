@@ -14,6 +14,8 @@ class World {
     collectedBottlesCount = 0;
     collectedCoinsCount = 0;
 
+    runDraw = true;
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas; //xy
@@ -89,10 +91,10 @@ class World {
     }
 
     typeOfObjectIs(objName, obj, o) {
-        try{
+        try {
             return obj[obj.indexOf(o)].constructor.name == objName;
         }
-        catch{
+        catch {
             console.log("kein constructor.name");
         }
     }
@@ -111,7 +113,6 @@ class World {
     draw() {
         // diese Funktion nur für Zeichnen auf Canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
@@ -122,19 +123,20 @@ class World {
         this.addToMap(this.statusBarCoins);
         this.ctx.translate(this.camera_x, 0); // forwards
 
+        if (this.runDraw) {
+            this.addToMap(this.character);
+            this.addObjectsToMap(this.level.enemies);
+            this.addObjectsToMap(this.throwableObjects);
+            this.addObjectsToMap(this.level.collectableObjects);
 
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.level.collectableObjects);
+            this.ctx.translate(-this.camera_x, 0);
 
-        this.ctx.translate(-this.camera_x, 0);
-
-        // draw wird so oft aufgerufen, wie es die Grafikkarte hergibt
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
+            // draw wird so oft aufgerufen, wie es die Grafikkarte hergibt
+            let self = this;
+            requestAnimationFrame(function () {
+                self.draw();
+            });
+        }
     }
 
     addObjectsToMap(objects) {

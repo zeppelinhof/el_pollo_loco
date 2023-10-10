@@ -10,6 +10,8 @@ class Character extends MovableObject {
         bottom: 30
     }
 
+    notSetted = true;
+
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -111,6 +113,14 @@ class Character extends MovableObject {
 
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                if (this.notSetted) {
+                    this.notSetted = false;                    
+                    setTimeout(()=>{
+                        stopGame();
+                        this.world.runDraw = false;
+                        showGameover();                    
+                    }, 1000);
+                }
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {

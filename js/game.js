@@ -40,6 +40,10 @@ function initGame() {
         <canvas id="canvas" width="720px" height="480px">
 
         </canvas>
+
+        <div class="gameoverScreen d-none" id="gameoverScreen">
+
+        </div>
     `
     canvas = document.getElementById('canvas');
     initLevel();
@@ -58,6 +62,11 @@ function initStartscreen() {
             </div>
         </div>
     `
+}
+
+function showGameover() {
+    console.log('Angekommen');
+    document.getElementById('gameoverScreen').classList.remove('d-none');
 }
 
 window.addEventListener("keydown", (e) => {
@@ -79,17 +88,17 @@ window.addEventListener("keydown", (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
-        resetTimer();                  
+        resetTimer();
     }
 
     if (e.keyCode == 68) {
         keyboard.D = true;
-        resetTimer(); 
+        resetTimer();
     }
 
 });
 
-function resetTimer(){
+function resetTimer() {
     clearTimeout(this.keyTimerIdle);
     clearTimeout(this.keyTimerLongidle);
     keyboard.idle = false;

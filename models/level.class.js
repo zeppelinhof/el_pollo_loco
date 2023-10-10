@@ -10,5 +10,5 @@ class Level{
         this.clouds = clouds;
         this.backgroundObjects = backgroundObjects;
         this.collectableObjects = collectableObjects;
-    }
+    }    
 }
