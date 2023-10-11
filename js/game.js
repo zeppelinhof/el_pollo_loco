@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+
 let generalIntervalIds = [];
 let activeEndboss = [];
 let idleEndboss = [];
@@ -36,37 +37,85 @@ function stopGame() {
 }
 
 function initGame() {
+    document.getElementById('gameScreen').innerHTML = '';
     document.getElementById('gameScreen').innerHTML = /*html*/`
         <canvas id="canvas" width="720px" height="480px">
 
         </canvas>
 
         <div class="gameoverScreen d-none" id="gameoverScreen">
+            <div>
+                <div class="puntosPanel" >
+                    <div class=puntosText>Puntos alcanzados:</div>
+                    <div id="puntosValueGameover"></div>
+                </div>                
+            </div>
+        </div>
 
+        <div class="levelFinishedScreen d-none" id="levelFinishedScreen">
+            <div>
+                <div class="puntosPanel flex-column" >
+                    <div class="nivelCompletadoText">Nivel completado</div>    
+                    <div class="puntosPanel2">                        
+                        <div class=puntosText>Puntos alcanzados:</div>
+                        <div id="puntosValueLevelfinished"></div>
+                    </div>                    
+                </div>                            
+            </div>
+        </div>
+
+        <div id="button-panel-Gameover_Finished" class="d-none">
+            ${button_Points_StartGame()}
         </div>
     `
+
     canvas = document.getElementById('canvas');
     initLevel();
     world = new World(canvas, keyboard);
 }
 
 function initStartscreen() {
-    document.getElementById('gameScreen').innerHTML = /*html*/`
-        <div class="button-panel">
-            <div class="game-button">
-                Points
-            </div>
+    document.getElementById('gameScreen').innerHTML = button_Points_StartGame('initstartscreen');
+}
 
-            <div onclick="initGame();" class="game-button black-background">
-                Start Game
+function button_Points_StartGame() {
+    return /*html*/`
+    <div class="button-panel">
+        <div class="game-button" onclick="openDialog(${getHighscore()});">         <!--getPointsoverview-->
+            Puntos
+        </div>
+
+        <div onclick="initGame();" class="game-button black-background">
+        Empezar Juego
+        </div>
+    </div>
+
+    <div id="dialog" class="dialog-bg d-none" onclick="closeDialog();">
+        <div class="dialog">
+            <h1>Puntuación más alta</h1>
+            <div class="lineInPoints">
+                <div>Level 1:</div>
+                <p id="dialog-message">No hay</p>
             </div>
         </div>
+    </div>
     `
 }
 
 function showGameover() {
-    console.log('Angekommen');
-    document.getElementById('gameoverScreen').classList.remove('d-none');
+    showScreen('gameoverScreen');
+}
+
+function showLevelFinished() {
+    if (getTempHighscore() > getHighscore()) {
+        setHighscore(getTempHighscore());
+    }
+    showScreen('levelFinishedScreen');
+}
+
+function showScreen(screen) {
+    document.getElementById(screen).classList.remove('d-none');
+    document.getElementById('button-panel-Gameover_Finished').classList.remove('d-none');
 }
 
 window.addEventListener("keydown", (e) => {

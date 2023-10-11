@@ -1,5 +1,5 @@
 let level1;
-let countCoins = 3;
+let countCoins = 10;
 let countBottles = 5;
 let countChicken = 5;
 let countChick = 5;

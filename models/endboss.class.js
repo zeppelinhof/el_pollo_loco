@@ -163,6 +163,7 @@ class Endboss extends MovableObject {
             setTimeout(() => {
                 stopSpecialInterval(endbossExploding);
                 this.fallDownwards();
+                showLevelFinished();
             }, 2000);
         }
     }

@@ -82,6 +82,9 @@ class World {
                 }
                 else if (this.typeOfObjectIs('Coin', colObj, co)) {
                     this.collectedCoinsCount++;
+                    document.getElementById('puntosValueGameover').innerHTML = this.collectedCoinsCount;
+                    document.getElementById('puntosValueLevelfinished').innerHTML = this.collectedCoinsCount;
+                    setPoints(this.collectedCoinsCount, 1);
                     this.statusBarCoins.setPercentage(this.collectedCoinsCount);
                     colObj.splice(colObj.indexOf(co), 1);
                 }

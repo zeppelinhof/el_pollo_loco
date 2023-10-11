@@ -4,6 +4,9 @@ body{
     justify-content: center;
     align-items: center;
     background-image: url('img/desert-game-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #FFB300;
     background-position: center;
     margin: 0;
     height: 100vh;
@@ -21,7 +24,7 @@ canvas{
 
 .game-button{
     cursor: pointer;
-    background-color: antiquewhite;
+    background-color: white;
     border-radius: 10px;
     padding: 24px;
     font-family: 'Arbutus'; 
@@ -29,6 +32,16 @@ canvas{
 
 .button-panel{
     display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.button-panel-Gameover_Finished{
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    display: flex;
+    justify-content: center;
     gap: 12px;
 }
 
@@ -53,7 +66,93 @@ canvas{
     height: 480px;
     background-image: url('img/9_intro_outro_screens/game_over/game over!.png');
     background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.levelFinishedScreen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 720px; 
+    height: 480px;
+    background-color: #FFB300;
+    background-image: url('img/desert-game-background.jpg');
+    background-size: cover;
+    background-repeat:no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.puntosPanel{
+    display: flex;
+    font-family: 'Arbutus'; 
+    font-size: 32px;
+    color:white;
+    margin-top: 250px;
+    margin-bottom: 24px;
+    align-items: center;
+    gap: 12px;
+}
+
+.puntosPanel2{
+    display: flex;
+    gap: 12px;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+#puntosValue{    
+    font-size: 60px;    
+    color: #FFB300;
+}
+
+.nivelCompletadoText{
+    font-family: 'Arbutus'; 
+    color:white;
+}
+
+.pointsOverview{
+    width: 200px;
+    height: 200px;
+    background-color: #FFB300;
+}
+
+/*#region Dialog */
+.dialog-bg{
+    background-color: rgba(0,0,0,0.2);
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog{
+    height: 50vh;
+    width: 50vw;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.lineInPoints{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Arbutus'; 
+}
+
+/*#endregion Dialog */
 
 .d-none{
     display: none;

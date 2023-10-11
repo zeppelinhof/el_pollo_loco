@@ -7,8 +7,9 @@ Aufgaben:
 ✔ Endgegner besiegen
 
 ✔ Idle
-• Game-Over Screen
-• Übersicht Punkte
+✔ Game-Over Screen
+✔ Übersicht Punkte
+• Button Punkte über localStorage
 • Musik, Sounds
 • Fullscreen-Modus (canvas.requestFullscreen)
 • Erklärung der Spieltasten für Spieler
