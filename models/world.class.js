@@ -105,7 +105,7 @@ class World {
     checkThrowObjects() {
         if (this.keyboard.D) {
             if (this.collectedBottlesCount > 0) {
-                let bottle = new Bottle(this.character.x + 100, this.character.y + 100, world);
+                let bottle = new Bottle(this.character.x + 50, this.character.y + 100, world, this.character.otherDirection);
                 this.throwableObjects.push(bottle);
                 this.collectedBottlesCount--;
                 this.statusBarBottles.setPercentage(this.collectedBottlesCount);

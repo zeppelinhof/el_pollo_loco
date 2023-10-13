@@ -11,13 +11,19 @@ class ThrowableObject extends MovableObject {
         bottom: 20
     }
 
-    constructor(x, y) {
+    constructor(x, y, otherDirection) {
         super();
-        this.x = x;
+        // Ausgangslage der Flasche für vorwärtswerfen
+        if (!otherDirection) {
+            this.x = x;
+            // Ausgangslage der Flasche für rückwärtswerfen
+        } else {
+            this.x = x - 50;
+        }
         this.y = y;
         this.height = 60;
         this.width = 50;
-        this.throw(false);
+        this.throw(otherDirection);
 
     }
 
@@ -27,10 +33,10 @@ class ThrowableObject extends MovableObject {
         setGeneralInterval(() => {
             if (otherDirection == false) {
                 this.x += 5; // vorwärts werfen
-            } else{
+            } else {
                 this.x -= 5;    // rückwärts werfen
             }
-            
+
         }, 25);
     }
 }

@@ -116,8 +116,9 @@ class Character extends MovableObject {
                 if (this.notSetted) {
                     this.notSetted = false;                    
                     setTimeout(()=>{
-                        stopGame();
                         this.world.runDraw = false;
+                        this.walking_sound.pause();
+                        // hier evtl. alle Sounds beenden
                         showGameover();                    
                     }, 1000);
                 }

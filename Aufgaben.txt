@@ -12,8 +12,9 @@ Aufgaben:
 ✔ Button Punkte über localStorage
 ✔ Puntos Dialog responsive
 ✔ responsive spielen
-• wird idle in mobile aufgehoben?
-• Spiel (alle setIntervals) komplett stoppen, wenn gameover/finished, damit nicht nahher noch Gameover
+✔ Rückwärts werfen
+• Laufgeräusch bei Finished beeden (bei Gameover wird dies in der Funktion isDead erledigt)
+• wird idle in mobile aufgehoben?´
 • Musik, Sounds
 • Fullscreen-Modus (canvas.requestFullscreen)
 • Erklärung der Spieltasten für Spieler

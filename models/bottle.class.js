@@ -21,8 +21,8 @@ class Bottle extends ThrowableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
 
-    constructor(x, y, world) {
-        super(x, y).loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
+    constructor(x, y, world, otherDirection) {
+        super(x, y, otherDirection).loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.IMAGES_ROTATING);
         this.loadImages(this.IMAGES_SPLASH);
         this.world = world;
