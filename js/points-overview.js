@@ -34,10 +34,6 @@ function setTempHighscore(points){
 }
 
 function openDialog(text){
-    document.getElementById('dialog').classList.remove('d-none');
+    showElement('dialog')
     document.getElementById('dialog-message').innerHTML = text;
-}
-
-function closeDialog(){
-    document.getElementById('dialog').classList.add('d-none');
 }

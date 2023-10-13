@@ -17,15 +17,20 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.height = 60;
         this.width = 50;
-        this.throw();
+        this.throw(false);
 
     }
 
-    throw() {
+    throw(otherDirection) {
         this.speedY = 30;
         this.applyGravity();
         setGeneralInterval(() => {
-            this.x += 5;
+            if (otherDirection == false) {
+                this.x += 5; // vorwärts werfen
+            } else{
+                this.x -= 5;    // rückwärts werfen
+            }
+            
         }, 25);
     }
 }

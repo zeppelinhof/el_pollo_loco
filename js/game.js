@@ -36,46 +36,52 @@ function stopGame() {
     bottleSplashIds.forEach(clearInterval);
 }
 
+function initStartscreen() {
+    document.getElementById('gameScreen').innerHTML = button_Points_StartGame();
+}
+
 function initGame() {
-    document.getElementById('gameScreen').innerHTML = '';
-    document.getElementById('gameScreen').innerHTML = /*html*/`
-        <canvas id="canvas" width="720px" height="480px">
+    hideElement('gameTitle');
+    document.getElementById('gameScreen').innerHTML = /*html*/`        
+        <div class="canvas_keyboard">
+            <canvas id="canvas" width="720px" height="480px">
 
-        </canvas>
+            </canvas>
 
-        <div class="gameoverScreen d-none" id="gameoverScreen">
-            <div>
-                <div class="puntosPanel" >
+            <div class="mobileKeyboard" id="mobileKeyboard">
+                <div id="buttonLeft" class="buttonLeft"></div>
+
+                <div id="buttonJump" class="mobileJump"></div>
+
+                <div id="buttonThrowBottle" class="mobileThrowBottle"></div>
+                
+                <div id="buttonRight" class="buttonRight"></div>
+            </div>
+        </div>
+
+        <div class="gameoverScreen" id="gameoverScreen">
+            <div class="puntosPanel" >
+                <div class=puntosText>Puntos alcanzados:</div>
+                <div id="puntosValueGameover"></div>
+            </div>                
+        </div>
+
+        <div class="levelFinishedScreen" id="levelFinishedScreen">
+            <div class="puntosPanel flex-column">
+                <div class="nivelCompletadoText">Nivel completado</div>    
+                <div class="puntosPanel2">                        
                     <div class=puntosText>Puntos alcanzados:</div>
-                    <div id="puntosValueGameover"></div>
-                </div>                
-            </div>
-        </div>
-
-        <div class="levelFinishedScreen d-none" id="levelFinishedScreen">
-            <div>
-                <div class="puntosPanel flex-column" >
-                    <div class="nivelCompletadoText">Nivel completado</div>    
-                    <div class="puntosPanel2">                        
-                        <div class=puntosText>Puntos alcanzados:</div>
-                        <div id="puntosValueLevelfinished"></div>
-                    </div>                    
-                </div>                            
-            </div>
-        </div>
-
-        <div id="button-panel-Gameover_Finished" class="d-none">
-            ${button_Points_StartGame()}
-        </div>
+                    <div id="puntosValueLevelfinished"></div>
+                </div>                    
+            </div>                            
+        </div>        
     `
 
+    hideElement('gameoverScreen');
+    hideElement('levelFinishedScreen');
     canvas = document.getElementById('canvas');
     initLevel();
     world = new World(canvas, keyboard);
-}
-
-function initStartscreen() {
-    document.getElementById('gameScreen').innerHTML = button_Points_StartGame('initstartscreen');
 }
 
 function button_Points_StartGame() {
@@ -85,12 +91,12 @@ function button_Points_StartGame() {
             Puntos
         </div>
 
-        <div onclick="initGame();" class="game-button black-background">
+        <div onclick="initGame(); runEventlisteners();" class="game-button black-background">
         Empezar Juego
         </div>
     </div>
 
-    <div id="dialog" class="dialog-bg d-none" onclick="closeDialog();">
+    <div id="dialog" class="dialog-bg d-none" onclick="hideElement('dialog');">
         <div class="dialog">
             <h1>Puntuación más alta</h1>
             <div class="lineInPoints">
@@ -103,88 +109,49 @@ function button_Points_StartGame() {
 }
 
 function showGameover() {
+    hideElement('canvas');
+    hideElement('levelFinishedScreen');
     showScreen('gameoverScreen');
+    hideElement('mobileKeyboard');
 }
 
 function showLevelFinished() {
+    hideElement('canvas');
+    hideElement('gameoverScreen');
     if (getTempHighscore() > getHighscore()) {
         setHighscore(getTempHighscore());
     }
     showScreen('levelFinishedScreen');
+    hideMobileKeyboard();
+}
+
+function addButtons(element) {
+    document.getElementById(element).innerHTML += buttonsContent();
+}
+function buttonsContent() {
+    return /*html*/`
+        <div id="button-panel-Gameover_Finished" class="d-none">
+            ${button_Points_StartGame()}
+        </div>
+    `
 }
 
 function showScreen(screen) {
-    document.getElementById(screen).classList.remove('d-none');
-    document.getElementById('button-panel-Gameover_Finished').classList.remove('d-none');
+    showElement(screen);
+    addButtons(screen);
+    showElement('button-panel-Gameover_Finished');
 }
 
-window.addEventListener("keydown", (e) => {
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = true;
-        resetTimer();
+function hideElement(element) {
+    let classlist = document.getElementById(element).classList;
+    if (!classlist.contains('d-none')) {
+        classlist.add('d-none');
     }
-    if (e.keyCode == 37) {
-        keyboard.LEFT = true;
-        resetTimer();
-    }
-    if (e.keyCode == 38) {
-        keyboard.UP = true;
-        resetTimer();
-    }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = true;
-        resetTimer();
-    }
-    if (e.keyCode == 32) {
-        keyboard.SPACE = true;
-        resetTimer();
-    }
-
-    if (e.keyCode == 68) {
-        keyboard.D = true;
-        resetTimer();
-    }
-
-});
-
-function resetTimer() {
-    clearTimeout(this.keyTimerIdle);
-    clearTimeout(this.keyTimerLongidle);
-    keyboard.idle = false;
-    keyboard.longidle = false;
 }
 
-window.addEventListener("keyup", (e) => {
-
-    resetTimer();
-
-    keyTimerIdle = setTimeout(() => {
-        keyboard.longidle = false;
-        keyboard.idle = true;
-    }, 100);
-
-    keyTimerLongidle = setTimeout(() => {
-        keyboard.idle = false;
-        keyboard.longidle = true;
-    }, 7000);
-
-
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = false;
+function showElement(element) {
+    let classlist = document.getElementById(element).classList;
+    if (classlist.contains('d-none')) {
+        classlist.remove('d-none');
     }
-    if (e.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-    if (e.keyCode == 38) {
-        keyboard.UP = false;
-    }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-    if (e.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
-    if (e.keyCode == 68) {
-        keyboard.D = false;
-    }
-});
+}

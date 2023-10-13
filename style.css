@@ -6,7 +6,6 @@ body{
     background-image: url('img/desert-game-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: #FFB300;
     background-position: center;
     margin: 0;
     height: 100vh;
@@ -20,6 +19,7 @@ h1{
 
 canvas{
     background-color: black;    
+    display: block;
 }
 
 .game-button{
@@ -37,9 +37,6 @@ canvas{
 }
 
 .button-panel-Gameover_Finished{
-    position: absolute;
-    top: 50px;
-    left: 20px;
     display: flex;
     justify-content: center;
     gap: 12px;
@@ -59,31 +56,37 @@ canvas{
 }
 
 .gameoverScreen{
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 720px; 
     height: 480px;
     background-image: url('img/9_intro_outro_screens/game_over/game over!.png');
-    background-size: contain;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.levelFinishedScreen{
+    width: 720px; 
+    height: 480px;
+    background-image: url('img/desert-game-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.levelFinishedScreen{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 720px; 
-    height: 480px;
-    background-color: #FFB300;
-    background-image: url('img/desert-game-background.jpg');
-    background-size: cover;
-    background-repeat:no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.gameScreen{
+    display: block;
+}
+
+.canvas_keyboard{
+    position: relative;
 }
 
 .puntosPanel{
@@ -91,8 +94,6 @@ canvas{
     font-family: 'Arbutus'; 
     font-size: 32px;
     color:white;
-    margin-top: 250px;
-    margin-bottom: 24px;
     align-items: center;
     gap: 12px;
 }
@@ -139,6 +140,7 @@ canvas{
 .dialog{
     height: 50vh;
     width: 50vw;
+    min-height: 100px;
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -157,3 +159,106 @@ canvas{
 .d-none{
     display: none;
 }
+
+/*#region Smartphones  */
+@media only screen and (max-width: 720px){
+    canvas{
+        width: 100%;
+    }
+
+    .gameoverScreen{
+        width: 100vw;
+    }
+
+    .levelFinishedScreen{
+        width: 100vw;
+    }
+
+    h1{
+        font-size: 18px;
+    }
+}
+
+/* Wenn Höhe kleiner als Spielscreen-Höhe, dann Höhe Spielscreen-Höhe komplette Bildschirm-Höhe füllen*/
+@media only screen and (max-height: 480px){
+    canvas{
+        height: 100vh;
+    }
+
+    .levelFinishedScreen{
+        height: 100vh;
+    }
+
+    .gameoverScreen{
+        height: 100vh;
+    }
+
+    .hide-mobile{
+        display: none;
+    }
+    
+    h1{
+        font-size: 18px;
+    }
+
+    .mobileKeyboard{
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        height: 70px;
+        width: 100%;
+        /* background-color: aqua; */
+        
+    }
+
+    .buttonLeft{
+        position: absolute;
+        height: 60px;
+        width: 60px;
+        top: calc(50% - 30px);
+        left: 0;
+        background-image: url('img/arrowLeft.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .buttonRight{
+        position: absolute;
+        height: 60px;
+        width: 60px;
+        top: calc(50% - 30px);
+        right: 0;
+        background-image: url('img/arrowRight.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobileJump{
+        position: absolute;
+        height: 60px;
+        width: 60px;
+        top: calc(50% - 30px);
+        left: 20%;
+        background-image: url('img/jump.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .mobileThrowBottle{
+        position: absolute;
+        height: 40px;
+        width: 140px;
+        top: calc(50% - 10px);
+        left: 40%;
+        background: linear-gradient(to bottom, #fd8367, #FF0C00);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+    }
+}
+    
+
+/*#endregion Smartphones  */

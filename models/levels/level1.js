@@ -26,7 +26,6 @@ function initLevel() {
         cloudsArray[index] = cloud;
     }
 
-
     let collectableObjectsArray = new Array(countCoins + countBottles);
     for (let index = 0; index < countCoins; index++) {
         let coin = new Coin();
