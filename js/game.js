@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let screenMaximised = false;
 
 function initStartscreen() {
     document.getElementById('gameScreen').innerHTML = button_Points_StartGame();
@@ -9,7 +10,10 @@ function initStartscreen() {
 function initGame() {
     hideElement('gameTitle');
     document.getElementById('gameScreen').innerHTML = /*html*/`        
-        <div class="canvas_keyboard">
+        <div class="canvas_keyboard" id="canvas_keyboard">    
+            
+            <!-- <div id="sceensize-button"class="sceensize-button fullscreen-button"  onclick="screensize()"></div> -->
+
             <canvas id="canvas" width="720px" height="480px">
 
             </canvas>
@@ -19,7 +23,7 @@ function initGame() {
 
                 <div id="buttonJump" class="mobileJump"></div>
 
-                <div id="buttonThrowBottle" class="mobileThrowBottle"></div>
+                <div id="buttonThrowBottle" class="mobileThrowBottle"></div>                
                 
                 <div id="buttonRight" class="buttonRight"></div>
             </div>
@@ -122,4 +126,40 @@ function showElement(element) {
     if (classlist.contains('d-none')) {
         classlist.remove('d-none');
     }
+}
+
+function enterFullscreen(element) {
+    screenMaximised = true;
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {  // iOS Safari
+        element.webkitRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    screenMaximised = false;
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}
+
+function screensize() {
+    let sceensizeButton = document.getElementById('sceensize-button');
+    let screenToChangeSize = document.getElementById('canvas_keyboard');
+    if (!screenMaximised) {
+        sceensizeButton.classList.remove('fullscreen-button');
+        // sceensizeButton.classList.add('not-fullscreen-button');
+        enterFullscreen(screenToChangeSize);
+    } else {
+        sceensizeButton.classList.add('fullscreen.button');
+        // sceensizeButton.classList.remove('not-fullscreen-button');
+        exitFullscreen();
+    }
+
+
 }

@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,54 +9,55 @@ body{
     background-position: center;
     margin: 0;
     height: 100vh;
+    /* position: relative; */
 }
 
-h1{
-    font-family: 'Arbutus'; 
+h1 {
+    font-family: 'Arbutus';
     font-size: 48px;
-    color:saddlebrown;
+    color: saddlebrown;
 }
 
-canvas{
-    background-color: black;    
+canvas {
+    background-color: black;
     display: block;
 }
 
-.game-button{
+.game-button {
     cursor: pointer;
     background-color: white;
     border-radius: 10px;
     padding: 24px;
-    font-family: 'Arbutus'; 
+    font-family: 'Arbutus';
 }
 
-.button-panel{
+.button-panel {
     display: flex;
     justify-content: center;
     gap: 12px;
 }
 
-.button-panel-Gameover_Finished{
+.button-panel-Gameover_Finished {
     display: flex;
     justify-content: center;
     gap: 12px;
 }
 
-.game-button:hover{
+.game-button:hover {
     box-shadow: 0 0 8px 8px rgba(0 0 0 / 20%);
 }
 
-.black-background{
+.black-background {
     background-color: rgb(30, 30, 30);
-    color: white;    
+    color: white;
 }
 
-.black-background:hover{
+.black-background:hover {
     background-color: black;
 }
 
-.gameoverScreen{
-    width: 720px; 
+.gameoverScreen {
+    width: 720px;
     height: 480px;
     background-image: url('img/9_intro_outro_screens/game_over/game over!.png');
     background-size: cover;
@@ -68,8 +69,8 @@ canvas{
     justify-content: flex-end;
 }
 
-.levelFinishedScreen{
-    width: 720px; 
+.levelFinishedScreen {
+    width: 720px;
     height: 480px;
     background-image: url('img/desert-game-background.jpg');
     background-size: cover;
@@ -81,51 +82,55 @@ canvas{
     justify-content: center;
 }
 
-.gameScreen{
-    display: block;
+.gameScreen {    
+    display: block;     
 }
 
-.canvas_keyboard{
+.canvas_keyboard {
     position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;   
 }
 
-.puntosPanel{
+.puntosPanel {
     display: flex;
-    font-family: 'Arbutus'; 
+    font-family: 'Arbutus';
     font-size: 32px;
-    color:white;
+    color: white;
     align-items: center;
     gap: 12px;
 }
 
-.puntosPanel2{
+.puntosPanel2 {
     display: flex;
     gap: 12px;
 }
 
-.flex-column{
+.flex-column {
     flex-direction: column;
 }
 
-#puntosValue{    
-    font-size: 60px;    
+#puntosValue {
+    font-size: 60px;
     color: #FFB300;
 }
 
-.nivelCompletadoText{
-    font-family: 'Arbutus'; 
-    color:white;
+.nivelCompletadoText {
+    font-family: 'Arbutus';
+    color: white;
 }
 
-.pointsOverview{
+.pointsOverview {
     width: 200px;
     height: 200px;
     background-color: #FFB300;
 }
 
 /*#region Dialog */
-.dialog-bg{
-    background-color: rgba(0,0,0,0.2);
+.dialog-bg {
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: 999;
     position: fixed;
     left: 0;
@@ -137,7 +142,7 @@ canvas{
     align-items: center;
 }
 
-.dialog{
+.dialog {
     height: 50vh;
     width: 50vw;
     min-height: 100px;
@@ -147,71 +152,93 @@ canvas{
     padding: 24px;
 }
 
-.lineInPoints{
+.lineInPoints {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-family: 'Arbutus'; 
+    font-family: 'Arbutus';
 }
 
 /*#endregion Dialog */
 
-.d-none{
+.d-none {
     display: none;
 }
 
+.sceensize-button{
+    position: absolute;    
+    right: 50%;
+    width: 40px;
+    cursor: pointer;
+}
+
+.fullscreen-button {    
+    top: 0;
+    height: 40px;
+    background-image: url('img/full-screen.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.not-fullscreen-button{
+    top: 5px;
+    height: 5px;
+    background-color: #28518B;
+}
+
 /*#region Smartphones  */
-@media only screen and (max-width: 720px){
-    canvas{
+@media only screen and (max-width: 720px) {
+    canvas {
         width: 100%;
     }
 
-    .gameoverScreen{
+    .gameoverScreen {
         width: 100vw;
     }
 
-    .levelFinishedScreen{
+    .levelFinishedScreen {
         width: 100vw;
     }
 
-    h1{
+    h1 {
         font-size: 18px;
     }
 }
 
 /* Wenn Höhe kleiner als Spielscreen-Höhe, dann Höhe Spielscreen-Höhe komplette Bildschirm-Höhe füllen*/
-@media only screen and (max-height: 480px){
-    canvas{
+@media only screen and (max-height: 480px) {
+    canvas {
         height: 100vh;
     }
 
-    .levelFinishedScreen{
+    .levelFinishedScreen {
         height: 100vh;
     }
 
-    .gameoverScreen{
+    .gameoverScreen {
         height: 100vh;
     }
 
-    .hide-mobile{
+    .hide-mobile {
         display: none;
     }
-    
-    h1{
+
+    h1 {
         font-size: 18px;
     }
 
-    .mobileKeyboard{
+    .mobileKeyboard {
         position: absolute;
         bottom: 0px;
         left: 0;
         height: 70px;
         width: 100%;
         /* background-color: aqua; */
-        
+
     }
 
-    .buttonLeft{
+    .buttonLeft {
         position: absolute;
         height: 60px;
         width: 60px;
@@ -223,7 +250,7 @@ canvas{
         background-repeat: no-repeat;
     }
 
-    .buttonRight{
+    .buttonRight {
         position: absolute;
         height: 60px;
         width: 60px;
@@ -236,7 +263,7 @@ canvas{
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     }
 
-    .mobileJump{
+    .mobileJump {
         position: absolute;
         height: 60px;
         width: 60px;
@@ -248,7 +275,7 @@ canvas{
         background-repeat: no-repeat;
     }
 
-    .mobileThrowBottle{
+    .mobileThrowBottle {
         position: absolute;
         height: 40px;
         width: 140px;
@@ -259,6 +286,6 @@ canvas{
         border-radius: 20px;
     }
 }
-    
+
 
 /*#endregion Smartphones  */
