@@ -14,6 +14,11 @@ class World {
     collectedBottlesCount = 0;
     collectedCoinsCount = 0;
 
+    coin_sound = new Audio('audio/collect_coin.mp3')
+    squished_sound = new Audio('audio/squished.mp3')
+    squished_small_sound = new Audio('audio/squished_small.mp3')
+    bottle_sound = new Audio('audio/bottle.mp3')
+
     runDraw = true;
 
     constructor(canvas, keyboard) {
@@ -56,12 +61,14 @@ class World {
         }
         if (this.typeOfObjectIs('Chicken', enemyObj, enemyHit)) {
             this.level.enemies.push(new ChickenDead(enemyHit.x));
-            enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
+            enemyObj.splice(enemyObj.indexOf(enemyHit), 1);    
+            this.squished_sound.play();  
         }
 
         if (this.typeOfObjectIs('Chick', enemyObj, enemyHit)) {
             this.level.enemies.push(new ChickDead(enemyHit.x));
             enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
+            this.squished_small_sound.play();  
         }
 
         else if (this.typeOfObjectIs('Endboss', enemyObj, enemyHit)) {
@@ -79,6 +86,7 @@ class World {
                     this.collectedBottlesCount++;
                     this.statusBarBottles.setPercentage(this.collectedBottlesCount);
                     colObj.splice(colObj.indexOf(co), 1);
+                    this.bottle_sound.play();
                 }
                 else if (this.typeOfObjectIs('Coin', colObj, co)) {
                     this.collectedCoinsCount++;
@@ -87,6 +95,7 @@ class World {
                     setPoints(this.collectedCoinsCount, 1);
                     this.statusBarCoins.setPercentage(this.collectedCoinsCount);
                     colObj.splice(colObj.indexOf(co), 1);
+                    this.coin_sound.play();                
                 }
 
             }

@@ -13,11 +13,13 @@ Aufgaben:
 ✔ Puntos Dialog responsive
 ✔ responsive spielen
 ✔ Rückwärts werfen
-• Laufgeräusch bei Finished beeden (bei Gameover wird dies in der Funktion isDead erledigt)
-• wird idle in mobile aufgehoben?´
-• Musik, Sounds
-• Fullscreen-Modus (canvas.requestFullscreen)
+✔ Laufgeräusch bei Finished beenden (bei Gameover wird dies in der Funktion isDead erledigt)
+✔ wird idle in mobile aufgehoben?´
+✔ Musik, Sounds
+✔ Fullscreen-Modus (canvas.requestFullscreen)
+• all Sounds über playSound() abspielen --> Taste Musik ausschalten (if Bedingung um playSound)
 • Erklärung der Spieltasten für Spieler
+• zweites Level
 
 
 onmouseover="right();" onmouseout="notright();"

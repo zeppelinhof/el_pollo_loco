@@ -4,6 +4,8 @@ class Bottle extends ThrowableObject {
     timeoutSplashOn = false;
     enemyHit;
 
+    splash_sound = new Audio('audio/splash.mp3')
+
 
     IMAGES_ROTATING = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -55,6 +57,7 @@ class Bottle extends ThrowableObject {
     checkCollision_Bottle_Enemy() {
         this.world.level.enemies.forEach((enemy) => {
             if (this.isColliding(enemy)) {
+                playSound(this.splash_sound);
                 this.isSplashed = true;
                 this.speedY = 10;
                 this.enemyHit = enemy;

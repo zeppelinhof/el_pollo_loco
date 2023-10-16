@@ -87,6 +87,7 @@ function showGameover() {
 }
 
 function showLevelFinished() {
+    stopSounds();
     stopGame();
     hideElement('canvas');
     hideElement('gameoverScreen');
@@ -94,7 +95,6 @@ function showLevelFinished() {
         setHighscore(getTempHighscore());
     }
     showScreen('levelFinishedScreen');
-    hideMobileKeyboard();
 }
 
 function addButtons(element) {
@@ -160,6 +160,12 @@ function screensize() {
         // sceensizeButton.classList.remove('not-fullscreen-button');
         exitFullscreen();
     }
+}
 
+function playSound(objsound){
+    objsound.play();  
+}
 
+function stopSounds(){
+    world.character.walking_sound.pause();
 }
