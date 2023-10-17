@@ -62,13 +62,13 @@ class World {
         if (this.typeOfObjectIs('Chicken', enemyObj, enemyHit)) {
             this.level.enemies.push(new ChickenDead(enemyHit.x));
             enemyObj.splice(enemyObj.indexOf(enemyHit), 1);    
-            this.squished_sound.play();  
+            playSound(this.squished_sound);
         }
 
         if (this.typeOfObjectIs('Chick', enemyObj, enemyHit)) {
             this.level.enemies.push(new ChickDead(enemyHit.x));
             enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
-            this.squished_small_sound.play();  
+            playSound(this.squished_small_sound);
         }
 
         else if (this.typeOfObjectIs('Endboss', enemyObj, enemyHit)) {
@@ -86,7 +86,7 @@ class World {
                     this.collectedBottlesCount++;
                     this.statusBarBottles.setPercentage(this.collectedBottlesCount);
                     colObj.splice(colObj.indexOf(co), 1);
-                    this.bottle_sound.play();
+                    playSound(this.bottle_sound);
                 }
                 else if (this.typeOfObjectIs('Coin', colObj, co)) {
                     this.collectedCoinsCount++;
@@ -95,7 +95,7 @@ class World {
                     setPoints(this.collectedCoinsCount, 1);
                     this.statusBarCoins.setPercentage(this.collectedCoinsCount);
                     colObj.splice(colObj.indexOf(co), 1);
-                    this.coin_sound.play();                
+                    playSound(this.coin_sound);        
                 }
 
             }

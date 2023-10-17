@@ -17,9 +17,10 @@ Aufgaben:
 ✔ wird idle in mobile aufgehoben?´
 ✔ Musik, Sounds
 ✔ Fullscreen-Modus (canvas.requestFullscreen)
-• all Sounds über playSound() abspielen --> Taste Musik ausschalten (if Bedingung um playSound)
-• Erklärung der Spieltasten für Spieler
+✔ alle Sounds über playSound() abspielen --> Taste Musik ausschalten (if Bedingung um playSound)
 • zweites Level
+• Erklärung der Spieltasten für Spieler
+
 
 
 onmouseover="right();" onmouseout="notright();"

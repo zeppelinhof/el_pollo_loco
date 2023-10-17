@@ -2,50 +2,16 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let screenMaximised = false;
+let soundON;
 
 function initStartscreen() {
-    document.getElementById('gameScreen').innerHTML = button_Points_StartGame();
+    document.getElementById('gameScreen').innerHTML = fillButton_Points_StartGame();
 }
 
 function initGame() {
     hideElement('gameTitle');
-    document.getElementById('gameScreen').innerHTML = /*html*/`        
-        <div class="canvas_keyboard" id="canvas_keyboard">    
-            
-            <!-- <div id="sceensize-button"class="sceensize-button fullscreen-button"  onclick="screensize()"></div> -->
-
-            <canvas id="canvas" width="720px" height="480px">
-
-            </canvas>
-
-            <div class="mobileKeyboard" id="mobileKeyboard">
-                <div id="buttonLeft" class="buttonLeft"></div>
-
-                <div id="buttonJump" class="mobileJump"></div>
-
-                <div id="buttonThrowBottle" class="mobileThrowBottle"></div>                
-                
-                <div id="buttonRight" class="buttonRight"></div>
-            </div>
-        </div>
-
-        <div class="gameoverScreen" id="gameoverScreen">
-            <div class="puntosPanel" >
-                <div class=puntosText>Puntos alcanzados:</div>
-                <div id="puntosValueGameover"></div>
-            </div>                
-        </div>
-
-        <div class="levelFinishedScreen" id="levelFinishedScreen">
-            <div class="puntosPanel flex-column">
-                <div class="nivelCompletadoText">Nivel completado</div>    
-                <div class="puntosPanel2">                        
-                    <div class=puntosText>Puntos alcanzados:</div>
-                    <div id="puntosValueLevelfinished"></div>
-                </div>                    
-            </div>                            
-        </div>        
-    `
+    soundON = true;
+    document.getElementById('gameScreen').innerHTML = fillGameScreen();
 
     hideElement('gameoverScreen');
     hideElement('levelFinishedScreen');
@@ -54,43 +20,21 @@ function initGame() {
     world = new World(canvas, keyboard);
 }
 
-function button_Points_StartGame() {
-    return /*html*/`
-    <div class="button-panel">
-        <div class="game-button" onclick="openDialog(${getHighscore()});">         <!--getPointsoverview-->
-            Puntos
-        </div>
-
-        <div onclick="initGame(); runEventlisteners();" class="game-button black-background">
-        Empezar Juego
-        </div>
-    </div>
-
-    <div id="dialog" class="dialog-bg d-none" onclick="hideElement('dialog');">
-        <div class="dialog">
-            <h1>Puntuación más alta</h1>
-            <div class="lineInPoints">
-                <div>Level 1:</div>
-                <p id="dialog-message">No hay</p>
-            </div>
-        </div>
-    </div>
-    `
-}
-
 function showGameover() {
     stopGame();
     hideElement('canvas');
     hideElement('levelFinishedScreen');
+    hideElement('switch-sound');
     showScreen('gameoverScreen');
     hideElement('mobileKeyboard');
 }
 
 function showLevelFinished() {
-    stopSounds();
+    stopAllSounds();
     stopGame();
     hideElement('canvas');
     hideElement('gameoverScreen');
+    hideElement('switch-sound');
     if (getTempHighscore() > getHighscore()) {
         setHighscore(getTempHighscore());
     }
@@ -98,14 +42,7 @@ function showLevelFinished() {
 }
 
 function addButtons(element) {
-    document.getElementById(element).innerHTML += buttonsContent();
-}
-function buttonsContent() {
-    return /*html*/`
-        <div id="button-panel-Gameover_Finished" class="d-none">
-            ${button_Points_StartGame()}
-        </div>
-    `
+    document.getElementById(element).innerHTML += fillButtonsContent();
 }
 
 function showScreen(screen) {
@@ -157,15 +94,55 @@ function screensize() {
         enterFullscreen(screenToChangeSize);
     } else {
         sceensizeButton.classList.add('fullscreen.button');
-        // sceensizeButton.classList.remove('not-fullscreen-button');
         exitFullscreen();
     }
 }
 
-function playSound(objsound){
-    objsound.play();  
+// #region Sounds
+
+function playSound(objsound) {
+    if (soundON) {
+        objsound.play();
+    }
 }
 
-function stopSounds(){
-    world.character.walking_sound.pause();
+function stopSound(objsound) {
+    objsound.pause();
+}
+
+function stopAllSounds() {
+    stopSound(world.character.walking_sound);
+}
+
+// if sound is on (sound button for off visible) and button is clicked then switch sound off and show button for switch on
+function switchSound() {
+    if (soundON) {
+        changeSoundButton(false, true)
+
+    } else {
+        changeSoundButton(true, false)
+    }
+}
+
+function changeSoundButton(on, off) {
+    switchClass('switch-sound', 'img-sound-on', on);
+    switchClass('switch-sound', 'img-sound-off', off);
+    soundON = on;
+}
+
+// #endregion Sounds
+
+/**
+ * Add or remove a class to a div
+ * 
+ * @param {string} obj - id of container to add or change a class
+ * @param {string} cls - class to add or remove
+ * @param {boolean} add - decision whether add or remove class
+ */
+function switchClass(obj, cls, add) {
+    if (add) {
+        document.getElementById(obj).classList.add(cls);
+    } else {
+        document.getElementById(obj).classList.remove(cls);
+    }
 }

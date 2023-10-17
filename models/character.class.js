@@ -117,7 +117,7 @@ class Character extends MovableObject {
                     this.notSetted = false;                    
                     setTimeout(()=>{
                         this.world.runDraw = false;
-                        this.walking_sound.pause();
+                        stopSound(this.walking_sound);
                         // hier evtl. alle Sounds beenden
                         showGameover();                    
                     }, 1000);
@@ -127,11 +127,11 @@ class Character extends MovableObject {
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
-                this.walking_sound.pause();
+                stopSound(this.walking_sound);
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     // Arm-Leg Movement Animation
                     this.playAnimation(this.IMAGES_WALKING);
-                    this.walking_sound.play();
+                    playSound(this.walking_sound);
                 }
             }
         }, 20);

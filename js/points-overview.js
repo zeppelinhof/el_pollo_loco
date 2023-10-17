@@ -1,10 +1,5 @@
 function getPointsoverview(){
-    document.getElementById('gameScreen').innerHTML = /*html*/`
-        <div class="pointsOverview">
-            <div>Highscore:</div>
-            <div id="highscore"></div>
-        </div>
-    `
+    document.getElementById('gameScreen').innerHTML = fillPointsOverview();
 }
 
 function setPoints(points, level) {
