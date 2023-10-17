@@ -18,7 +18,7 @@ Aufgaben:
 ✔ Musik, Sounds
 ✔ Fullscreen-Modus (canvas.requestFullscreen)
 ✔ alle Sounds über playSound() abspielen --> Taste Musik ausschalten (if Bedingung um playSound)
-• zweites Level
+✔ zweites Level
 • Erklärung der Spieltasten für Spieler
 
 

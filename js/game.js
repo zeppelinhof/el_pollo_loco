@@ -3,13 +3,17 @@ let world;
 let keyboard = new Keyboard();
 let screenMaximised = false;
 let soundON;
+let level_end_x = 2200;
 let screenwidth = 720;
+let countBackgroundObjects = Math.round(level_end_x / screenwidth) + 2;
+
 
 function initStartscreen() {
     document.getElementById('gameScreen').innerHTML = fillButton_Points_StartGame();
+    checkSecondLevelButton();
 }
 
-function initGame() {
+function initGame(levelNumber) {
     hideElement('gameTitle');
     soundON = true;
     document.getElementById('gameScreen').innerHTML = fillGameScreen();
@@ -17,8 +21,8 @@ function initGame() {
     hideElement('gameoverScreen');
     hideElement('levelFinishedScreen');
     canvas = document.getElementById('canvas');
-    initLevel(screenwidth);
-    world = new World(canvas, keyboard);
+    initLevel(screenwidth, levelNumber);
+    world = new World(canvas, keyboard, levelNumber);
 }
 
 function showGameover() {
@@ -40,10 +44,13 @@ function showLevelFinished() {
         setHighscore(getTempHighscore());
     }
     showScreen('levelFinishedScreen');
+    enableSecondLevel();
+    checkSecondLevelButton();
 }
 
 function addButtons(element) {
     document.getElementById(element).innerHTML += fillButtonsContent();
+    checkSecondLevelButton();
 }
 
 function showScreen(screen) {
@@ -145,5 +152,28 @@ function switchClass(obj, cls, add) {
         document.getElementById(obj).classList.add(cls);
     } else {
         document.getElementById(obj).classList.remove(cls);
+    }
+}
+
+function enableSecondLevel() {
+
+    let secondLevellEnabled = JSON.stringify(1);
+    localStorage.setItem('secondLevellEnabled', secondLevellEnabled);
+}
+
+function secondLevelEnabled(){
+    let secondLevellEnabled = localStorage.getItem('secondLevellEnabled');
+    let sle = JSON.parse(secondLevellEnabled);
+    return sle == 1;
+}
+
+function checkSecondLevelButton() {
+    document.getElementById('secondLevelButton').innerHTML = '';
+    if (secondLevelEnabled()) {
+        document.getElementById('secondLevelButton').innerHTML += /*html*/`
+            <div onclick="initGame('2'); runEventlisteners();" class="game-button black-background">
+                Empezar Nivel 2
+            </div>
+            `   
     }
 }

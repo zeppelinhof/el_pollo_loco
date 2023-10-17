@@ -41,16 +41,18 @@ function fillGameScreen() {
 `
 }
 
-function fillButton_Points_StartGame() {
+function fillButton_Points_StartGame() {    
     return /*html*/`
-    <div class="button-panel">
+    <div class="button-panel" id="button-panel">
         <div class="game-button" onclick="openDialog(${getHighscore()});">         <!--getPointsoverview-->
             Puntos
         </div>
-
-        <div onclick="initGame(); runEventlisteners();" class="game-button black-background">
-        Empezar Juego
+        <!-- parameter of initGame represents level -->
+        <div onclick="initGame('1'); runEventlisteners();" class="game-button black-background">
+        Empezar Nivel 1
         </div>
+        
+        <div id="secondLevelButton"></div>
     </div>
 
     <div id="dialog" class="dialog-bg d-none" onclick="hideElement('dialog');">
@@ -62,7 +64,7 @@ function fillButton_Points_StartGame() {
             </div>
         </div>
     </div>
-    `
+    `    
 }
 
 function fillButtonsContent() {

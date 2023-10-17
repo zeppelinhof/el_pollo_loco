@@ -1,9 +1,9 @@
 class World {
 
     character = new Character();
-    level = level1;
     canvas;  //xy
     ctx;
+    selectedLevel;
     keyboard;
     camera_x = 0;
     statusBarLive = new StatusBarLive();
@@ -21,29 +21,36 @@ class World {
 
     runDraw = true;
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, levelNumber) {
+        if (levelNumber == '1') {
+            this.selectedLevel = level1;
+        }
+        if (levelNumber == '2') {
+            this.selectedLevel = level2;
+        }
+
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas; //xy
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.run();
+        this.run(levelNumber);
     }
 
     setWorld() {
         this.character.world = this; // this= aktuelle Instanz der Welt
     }
 
-    run() {
+    run(levelNumber) {
         setGeneralInterval(() => {
             this.checkThrowObjects();
             this.checkCollisionsWithEnemy();
-            this.checkCollisionsWithCollectableObject();
+            this.checkCollisionsWithCollectableObject(levelNumber);
         }, 50);
     }
 
     checkCollisionsWithEnemy() {
-        this.level.enemies.forEach((enemy) => {
+        this.selectedLevel.enemies.forEach((enemy) => {
             if (this.character.isCollidingFromTop(enemy)) {
                 this.jumpOnEnemy(enemy, true);
             }
@@ -55,18 +62,18 @@ class World {
     }
 
     jumpOnEnemy(enemyHit, realJump) {  // Pepe jumps on Enemy
-        let enemyObj = level1.enemies;
+        let enemyObj = this.selectedLevel.enemies;
         if (realJump) {
             this.character.speedY = 10;
         }
         if (this.typeOfObjectIs('Chicken', enemyObj, enemyHit)) {
-            this.level.enemies.push(new ChickenDead(enemyHit.x));
+            this.selectedLevel.enemies.push(new ChickenDead(enemyHit.x));
             enemyObj.splice(enemyObj.indexOf(enemyHit), 1);    
             playSound(this.squished_sound);
         }
 
         if (this.typeOfObjectIs('Chick', enemyObj, enemyHit)) {
-            this.level.enemies.push(new ChickDead(enemyHit.x));
+            this.selectedLevel.enemies.push(new ChickDead(enemyHit.x));
             enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
             playSound(this.squished_small_sound);
         }
@@ -78,9 +85,9 @@ class World {
 
     }
 
-    checkCollisionsWithCollectableObject() {  // Pepe collects Coin or Bottle
-        let colObj = level1.collectableObjects;
-        this.level.collectableObjects.forEach((co) => {
+    checkCollisionsWithCollectableObject(levelNumber) {  // Pepe collects Coin or Bottle
+        let colObj = this.selectedLevel.collectableObjects;
+        this.selectedLevel.collectableObjects.forEach((co) => {
             if (this.character.isColliding(co)) {
                 if (this.typeOfObjectIs('BottleCollectable', colObj, co)) {
                     this.collectedBottlesCount++;
@@ -92,7 +99,7 @@ class World {
                     this.collectedCoinsCount++;
                     document.getElementById('puntosValueGameover').innerHTML = this.collectedCoinsCount;
                     document.getElementById('puntosValueLevelfinished').innerHTML = this.collectedCoinsCount;
-                    setPoints(this.collectedCoinsCount, 1);
+                    setPoints(this.collectedCoinsCount, levelNumber);
                     this.statusBarCoins.setPercentage(this.collectedCoinsCount);
                     colObj.splice(colObj.indexOf(co), 1);
                     playSound(this.coin_sound);        
@@ -126,8 +133,8 @@ class World {
         // diese Funktion nur für Zeichnen auf Canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.selectedLevel.backgroundObjects);
+        this.addObjectsToMap(this.selectedLevel.clouds);
         this.ctx.translate(-this.camera_x, 0); // back
         // space for fixed objects
         this.addToMap(this.statusBarLive);
@@ -137,9 +144,9 @@ class World {
 
         if (this.runDraw) {
             this.addToMap(this.character);
-            this.addObjectsToMap(this.level.enemies);
+            this.addObjectsToMap(this.selectedLevel.enemies);
             this.addObjectsToMap(this.throwableObjects);
-            this.addObjectsToMap(this.level.collectableObjects);
+            this.addObjectsToMap(this.selectedLevel.collectableObjects);
 
             this.ctx.translate(-this.camera_x, 0);
 

@@ -64,7 +64,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = new Level().level_end_x + 100;  // this.world.level.level_end_x   new Level().level_end_x 
+        this.x = level_end_x + 100;
         this.idleEndboss();
     }
 

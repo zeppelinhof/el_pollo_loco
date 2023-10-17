@@ -55,7 +55,7 @@ class Bottle extends ThrowableObject {
 
 
     checkCollision_Bottle_Enemy() {
-        this.world.level.enemies.forEach((enemy) => {
+        this.world.selectedLevel.enemies.forEach((enemy) => {
             if (this.isColliding(enemy)) {
                 playSound(this.splash_sound);
                 this.isSplashed = true;
