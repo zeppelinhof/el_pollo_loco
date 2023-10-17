@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let screenMaximised = false;
 let soundON;
+let screenwidth = 720;
 
 function initStartscreen() {
     document.getElementById('gameScreen').innerHTML = fillButton_Points_StartGame();
@@ -16,7 +17,7 @@ function initGame() {
     hideElement('gameoverScreen');
     hideElement('levelFinishedScreen');
     canvas = document.getElementById('canvas');
-    initLevel();
+    initLevel(screenwidth);
     world = new World(canvas, keyboard);
 }
 

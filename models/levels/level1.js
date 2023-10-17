@@ -5,13 +5,13 @@ let countChicken = 5;
 let countChick = 5;
 let countCloud = 4;
 
-function initLevel() {
+function initLevel(screenwidth) {
 
     let enemiesArray = new Array(countChicken);
     for (let index = 0; index < countChicken; index++) {
         let chicken = new Chicken();
         enemiesArray[index] = chicken;
-    } 
+    }
 
     for (let index = countChicken; index < countChicken + countChick; index++) {
         let chick = new Chick();
@@ -37,35 +37,49 @@ function initLevel() {
         collectableObjectsArray[index] = bottle;
     }
 
+    let screenwidthN1 = screenwidth - 1;
+    const layers1 = ['air', '3_third_layer/1', '2_second_layer/1', '1_first_layer/1'];
+    const layers2 = ['air', '3_third_layer/2', '2_second_layer/2', '1_first_layer/2'];
+    backgroundArray = [
+
+        new BackgroundObject('img/5_background/layers/air.png', -(screenwidthN1)),
+        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', -(screenwidthN1)),
+        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', -(screenwidthN1)),
+        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', -(screenwidthN1)),
+    ];
+
+    for (let i = 0; i < 3; i += 2) {
+        createBackgroundObject(i);
+        // backgroundArray.push(
+        //     new BackgroundObject('img/5_background/layers/air.png', (screenwidthN1) * i),
+        //     new BackgroundObject('img/5_background/layers/3_third_layer/1.png', (screenwidthN1) * i),
+        //     new BackgroundObject('img/5_background/layers/2_second_layer/1.png', (screenwidthN1) * i),
+        //     new BackgroundObject('img/5_background/layers/1_first_layer/1.png', (screenwidthN1) * i),
+
+        //     new BackgroundObject('img/5_background/layers/air.png', (screenwidthN1) * (i + 1)),
+        //     new BackgroundObject('img/5_background/layers/3_third_layer/2.png', (screenwidthN1) * (i + 1)),
+        //     new BackgroundObject('img/5_background/layers/2_second_layer/2.png', (screenwidthN1) * (i + 1)),
+        //     new BackgroundObject('img/5_background/layers/1_first_layer/2.png', (screenwidthN1) * (i + 1)),
+        // );
+    }
+
+    function createBackgroundObject(i) {
+        for (const layer of layers1) {
+            backgroundArray.push(
+                new BackgroundObject(`img/5_background/layers/${layer}.png`, (screenwidthN1) * i)
+            );            
+        }
+        for (const layer of layers2) {
+            backgroundArray.push(
+                new BackgroundObject(`img/5_background/layers/${layer}.png`, (screenwidthN1) * (i+1))
+            );            
+        }
+    }
 
     level1 = new Level(
         enemiesArray,
         cloudsArray,
-        [
-
-            new BackgroundObject('img/5_background/layers/air.png', -719),
-            new BackgroundObject('img/5_background/layers/3_third_layer/2.png', -719),
-            new BackgroundObject('img/5_background/layers/2_second_layer/2.png', -719),
-            new BackgroundObject('img/5_background/layers/1_first_layer/2.png', -719),
-
-            new BackgroundObject('img/5_background/layers/air.png', 0),
-            new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0),
-            new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),
-            new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0),
-            new BackgroundObject('img/5_background/layers/air.png', 719),
-            new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 719),
-            new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719),
-            new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719),
-
-            new BackgroundObject('img/5_background/layers/air.png', 719 * 2),
-            new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 719 * 2),
-            new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 719 * 2),
-            new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 719 * 2),
-            new BackgroundObject('img/5_background/layers/air.png', 719 * 3),
-            new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 719 * 3),
-            new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719 * 3),
-            new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 3)
-        ],
+        backgroundArray,
         collectableObjectsArray
     );
 }
