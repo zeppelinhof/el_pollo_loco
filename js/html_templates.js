@@ -36,7 +36,7 @@ function fillGameScreen() {
 
     <div class="levelFinishedScreen" id="levelFinishedScreen">
         <div class="puntosPanel flex-column">
-            <div class="nivelCompletadoText">Nivel completado</div>    
+            <div class="nivelCompletadoText hide-mobile">Nivel completado</div>    
             <div class="puntosPanel2">                        
                 <div class=puntosText>Puntos alcanzados:</div>
                 <div id="puntosValueLevelfinished"></div>
@@ -49,17 +49,17 @@ function fillGameScreen() {
 function fillButton_Points_StartGame() {    
     return /*html*/`
     <div class="button-panel" id="button-panel">
-        <div class="game-button" onclick="openDialog(${getHighscore(1)}, ${getHighscore(2)}, 'dialog');">         <!--getPointsoverview-->
+        <div class="game-button padding-12-mobile" onclick="openDialog(${getHighscore(1)}, ${getHighscore(2)}, 'dialog');">         <!--getPointsoverview-->
             Puntos
         </div>
         <!-- parameter of initGame represents level -->
-        <div onclick="initGame('1'); runEventlisteners();" class="game-button black-background">
+        <div onclick="initGame('1'); runEventlisteners();" class="game-button black-background padding-12-mobile">
         Empezar Nivel 1
         </div>
         
         <div id="secondLevelButton"></div>
 
-        <div class="game-button" onclick="openDialog('', '', 'dialogExplicacion');">         <!--getPointsoverview-->
+        <div class="game-button padding-12-mobile" onclick="openDialog('', '', 'dialogExplicacion');">         <!--getPointsoverview-->
             Explicación de los botones
         </div>
         
@@ -125,7 +125,7 @@ function fillPointsOverview() {
 
 function fillSecondLevelButton(){
     return /*html*/`
-    <div onclick="initGame('2'); runEventlisteners();" class="game-button black-background">
+    <div onclick="initGame('2'); runEventlisteners();" class="game-button black-background padding-12-mobile">
         Empezar Nivel 2
     </div>
     `   
