@@ -70,6 +70,9 @@ class Endboss extends MovableObject {
         this.levelNumber = levelNumber;
     }
 
+    /**
+     * idle if not key pressed
+     */
     idleEndboss() {
         setSpecialInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
@@ -80,6 +83,9 @@ class Endboss extends MovableObject {
         }, 200, idleEndboss);
     }
 
+    /**
+     * when endboss is hurted by Pepe it begins to come nearer
+     */
     activeEndboss() {
         setSpecialInterval(() => {
             if (this.alerted) {
@@ -121,6 +127,11 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * 
+     * @param {boolean} boolFirst - either attack or be alerted
+     * @param {boolean} boolSecond 
+     */
     switchAnimation_Alert_Attack(boolFirst, boolSecond) {
         this.animationAttackStopActivated = boolFirst;
         this.animationAlertStopActivated = boolSecond;
@@ -143,22 +154,32 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * next_animation function to avoid simultaneous running of several intervals
+     */
     nextAnimation_Attacking() {
-        this.attacking = true;
-        this.alerted = false;
-        this.hurted = false;
+        this.switchAnimation_On_Off(false, true, false);
     }
 
     nextAnimation_Alerted() {
-        this.alerted = true;
-        this.attacking = false;
-        this.hurted = false;
+        this.switchAnimation_On_Off(true, false, false);
     }
 
     nextAnimation_Dead() {
-        this.alerted = false;
-        this.attacking = false;
-        this.hurted = false;
+        this.switchAnimation_On_Off(false, false, false);
+    }
+
+    /**
+     * at most one animation is true
+     * 
+     * @param {boolean} animationType1 - say if alerted is true or false
+     * @param {boolean} animationType2 - say if attacking is true or false
+     * @param {boolean} animationType3 - say if hurted is true or false 
+     */
+    switchAnimation_On_Off(animationType1, animationType2, animationType3,) {
+        this.alerted = animationType1;
+        this.attacking = animationType2;
+        this.hurted = animationType3;
     }
 
     exploding() {

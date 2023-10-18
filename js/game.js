@@ -59,6 +59,10 @@ function showLevelFinished(levelNumber) {
     checkSecondLevelButton();
 }
 
+/**
+ * 
+ * @param {string} screenToHide - when game over then hide fnished screen and vice versa
+ */
 function showOnlySignificantScreen(screenToHide){
     hideElement('canvas');
     hideElement(screenToHide);
@@ -66,6 +70,11 @@ function showOnlySignificantScreen(screenToHide){
     hideElement('explainDuringGame');
 }
 
+/**
+ * Add buttons accordingly game situation
+ * 
+ * @param {element} element - where display butons
+ */
 function addButtons(element) {
     document.getElementById(element).innerHTML += fillButtonsContent();
     checkSecondLevelButton();
@@ -179,6 +188,9 @@ function enableSecondLevel() {
     localStorage.setItem('secondLevellEnabled', secondLevellEnabled);
 }
 
+/**
+ * check in local storage whether the second level is enabled by winning level 1
+ */
 function secondLevelEnabled(){
     let secondLevellEnabled = localStorage.getItem('secondLevellEnabled');
     let sle = JSON.parse(secondLevellEnabled);
@@ -188,10 +200,6 @@ function secondLevelEnabled(){
 function checkSecondLevelButton() {
     document.getElementById('secondLevelButton').innerHTML = '';
     if (secondLevelEnabled()) {
-        document.getElementById('secondLevelButton').innerHTML += /*html*/`
-            <div onclick="initGame('2'); runEventlisteners();" class="game-button black-background">
-                Empezar Nivel 2
-            </div>
-            `   
+        document.getElementById('secondLevelButton').innerHTML += fillSecondLevelButton();
     }
 }

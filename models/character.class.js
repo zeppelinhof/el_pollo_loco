@@ -90,6 +90,9 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    /**
+     * check pressed keys for Pepes behaviour or if he's dead, hurt, above ground or idleing
+     */
     animate() {
         setGeneralInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < level_end_x) {
@@ -147,6 +150,9 @@ class Character extends MovableObject {
         }, 500);
     }
 
+    /**
+     * when jump on enemy Pepe pushes away from the opponent a little (30)
+     */
     jump() {
         this.speedY = 30;
     }

@@ -34,6 +34,11 @@ class DrawableObject {
         }
     }
 
+    /**
+     * only for testing
+     * 
+     * @param {*} ctx - canvas.getContext('2d')
+     */
     drawFrame(ctx) {
         if (this instanceof DrawableObject || this instanceof Chicken) {
             ctx.beginPath();
@@ -55,6 +60,12 @@ class DrawableObject {
         return startPoint + Math.random() * (level_end_x);
     }
 
+    /**
+     * random position in y-direction for coins
+     * 
+     * @param {number} startPointY - in pixels
+     * @returns 
+     */
     randomPositionY(startPointY) {
         return startPointY + Math.random() * 300;
     }

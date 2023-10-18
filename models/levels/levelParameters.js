@@ -1,4 +1,3 @@
-
 let countCoins;
 let countBottles;
 let countChicken;
@@ -7,7 +6,12 @@ let countCloud;
 let level1;
 let level2;
 
-
+/**
+ * get specific paramters for level 1 or 2 (e.g. count of enemies )
+ * 
+ * @param {number} screenwidth - width of game screen in pixels
+ * @param {string} levelNumber 
+ */
 function initLevel(screenwidth, levelNumber) {
 
     if (levelNumber == '1') {
@@ -69,6 +73,10 @@ function initLevel(screenwidth, levelNumber) {
         createBackgroundObject(i);
     }
 
+    /**
+     * 
+     * @param {number} i - depends on position on width of level (running route) and width of screen
+     */
     function createBackgroundObject(i) {
         for (const layer of layers1) {
             backgroundArray.push(

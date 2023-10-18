@@ -31,6 +31,9 @@ class Bottle extends ThrowableObject {
         this.animate();
     }
 
+    /**
+     * animate rotating and splashing bottle
+     */
     animate() {
         setSpecialInterval(() => {
             if (!this.isSplashed) {
@@ -54,6 +57,9 @@ class Bottle extends ThrowableObject {
 
 
 
+    /**
+     * check wheter bottle hits enemy
+     */
     checkCollision_Bottle_Enemy() {
         this.world.selectedLevel.enemies.forEach((enemy) => {
             if (this.isColliding(enemy)) {

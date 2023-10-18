@@ -32,9 +32,9 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
         setGeneralInterval(() => {
             if (otherDirection == false) {
-                this.x += 5; // vorwärts werfen
+                this.x += 5; // throw forward
             } else {
-                this.x -= 5;    // rückwärts werfen
+                this.x -= 5;    // throw backwards
             }
 
         }, 25);

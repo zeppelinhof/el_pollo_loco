@@ -33,13 +33,12 @@ class MovableObject extends DrawableObject {
 
     }
 
-    // isColliding(mo) {
-    //     return this.x + this.width > mo.x &&  // Rechts nach links ("hat Pepes rechte Seite die Linke Seite von Chicken überschritten?")
-    //         this.y + this.height > mo.y &&
-    //         this.x < mo.x + mo.width &&
-    //         this.y < mo.y + mo.height;
-    // }
-
+    /**
+     * check if this object is touching another object taking the offset into account
+     * 
+     * @param {object} mo - movable object
+     * @returns 
+     */
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -47,20 +46,21 @@ class MovableObject extends DrawableObject {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
+    /**
+     * 
+     * @param {object} mo 
+     * @returns - returns true if Pepe is coming from above (attacking enemy by jumping or throwing bottle)
+     */
     isCollidingFromTop(mo){
         return this.isColliding(mo) && 
         (Math.abs((this.y + this.height - this.offset.bottom) - (mo.y + mo.offset.top)) <= 70);
     }
 
-    // isColliding(obj) {
-    //     return (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) &&
-    //         (this.Y + this.offsetY + this.height) >= obj.Y &&
-    //         (this.Y + this.offsetY) <= (obj.Y + obj.height); //&&
-    //         //obj.onCollisionCourse;
-    // }
 
-
-
+    /**
+     * 
+     * @param {number} amountOfDamage - value that subtracts the amount of damage from the available energy
+     */
     hit(amountOfDamage) {
         this.energy -= amountOfDamage;
         if (this.energy < 0) {

@@ -1,3 +1,6 @@
+/**
+ * All html templates for dynamic insertion
+ */
 function fillGameScreen() {
     return /*html*/`        
     <div class="canvas_keyboard" id="canvas_keyboard">    
@@ -118,4 +121,12 @@ function fillPointsOverview() {
         <div id="highscore"></div>
     </div>
     `
+}
+
+function fillSecondLevelButton(){
+    return /*html*/`
+    <div onclick="initGame('2'); runEventlisteners();" class="game-button black-background">
+        Empezar Nivel 2
+    </div>
+    `   
 }

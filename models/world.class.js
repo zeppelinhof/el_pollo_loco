@@ -41,6 +41,11 @@ class World {
         this.character.world = this; // this= aktuelle Instanz der Welt
     }
 
+    /**
+     * start interval to run Pepe. Check situation e.g. if there is a collision with an enemy
+     * 
+     * @param {string} levelNumber - represent if level 1 or 2
+     */
     run(levelNumber) {
         setGeneralInterval(() => {
             this.checkThrowObjects();
@@ -61,6 +66,12 @@ class World {
         });
     }
 
+    /**
+     * Delete enemys if they are attacked by Pepe 
+     * 
+     * @param {obj} enemyHit - enemy that Pepe jumps on or throws a bottle at
+     * @param {boolean} realJump - check if Pepe is jumping or throwing a bottle
+     */
     jumpOnEnemy(enemyHit, realJump) {  // Pepe jumps on Enemy
         let enemyObj = this.selectedLevel.enemies;
         if (realJump) {
@@ -68,7 +79,7 @@ class World {
         }
         if (this.typeOfObjectIs('Chicken', enemyObj, enemyHit)) {
             this.selectedLevel.enemies.push(new ChickenDead(enemyHit.x));
-            enemyObj.splice(enemyObj.indexOf(enemyHit), 1);    
+            enemyObj.splice(enemyObj.indexOf(enemyHit), 1);
             playSound(this.squished_sound);
         }
 
@@ -90,23 +101,30 @@ class World {
         this.selectedLevel.collectableObjects.forEach((co) => {
             if (this.character.isColliding(co)) {
                 if (this.typeOfObjectIs('BottleCollectable', colObj, co)) {
-                    this.collectedBottlesCount++;
-                    this.statusBarBottles.setPercentage(this.collectedBottlesCount);
-                    colObj.splice(colObj.indexOf(co), 1);
-                    playSound(this.bottle_sound);
+                    this.collectBottle(colObj, co);
                 }
                 else if (this.typeOfObjectIs('Coin', colObj, co)) {
-                    this.collectedCoinsCount++;
-                    document.getElementById('puntosValueGameover').innerHTML = this.collectedCoinsCount;
-                    document.getElementById('puntosValueLevelfinished').innerHTML = this.collectedCoinsCount;
-                    setPoints(this.collectedCoinsCount, levelNumber);
-                    this.statusBarCoins.setPercentage(this.collectedCoinsCount);
-                    colObj.splice(colObj.indexOf(co), 1);
-                    playSound(this.coin_sound);        
+                    this.collectCoin(colObj, co, levelNumber);
                 }
-
             }
         });
+    }
+
+    collectBottle(colObj, co) {
+        this.collectedBottlesCount++;
+        this.statusBarBottles.setPercentage(this.collectedBottlesCount);
+        colObj.splice(colObj.indexOf(co), 1);
+        playSound(this.bottle_sound);
+    }
+
+    collectCoin(colObj, co, levelNumber) {
+        this.collectedCoinsCount++;
+        document.getElementById('puntosValueGameover').innerHTML = this.collectedCoinsCount;
+        document.getElementById('puntosValueLevelfinished').innerHTML = this.collectedCoinsCount;
+        setPoints(this.collectedCoinsCount, levelNumber);
+        this.statusBarCoins.setPercentage(this.collectedCoinsCount);
+        colObj.splice(colObj.indexOf(co), 1);
+        playSound(this.coin_sound);
     }
 
     typeOfObjectIs(objName, obj, o) {
@@ -118,6 +136,9 @@ class World {
         }
     }
 
+    /**
+     * check if there are bottles to throw
+     */
     checkThrowObjects() {
         if (this.keyboard.D) {
             if (this.collectedBottlesCount > 0) {
@@ -130,7 +151,22 @@ class World {
     }
 
     draw() {
-        // diese Funktion nur für Zeichnen auf Canvas
+        this.addStaticObjectsToMap();
+
+        // draw movable objects but interupt to draw character, enemies, bottles if Pepe is Dead
+        if (this.runDraw) {
+            this.addMovableObjectsToMap();
+
+            // draw wird so oft aufgerufen, wie es die Grafikkarte hergibt
+            let self = this;
+            requestAnimationFrame(function () {
+                self.draw();
+            });
+        }
+    }
+
+    addStaticObjectsToMap(){
+        // only for drawing on Canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.selectedLevel.backgroundObjects);
@@ -141,21 +177,14 @@ class World {
         this.addToMap(this.statusBarBottles);
         this.addToMap(this.statusBarCoins);
         this.ctx.translate(this.camera_x, 0); // forwards
+    }
 
-        if (this.runDraw) {
-            this.addToMap(this.character);
-            this.addObjectsToMap(this.selectedLevel.enemies);
-            this.addObjectsToMap(this.throwableObjects);
-            this.addObjectsToMap(this.selectedLevel.collectableObjects);
-
-            this.ctx.translate(-this.camera_x, 0);
-
-            // draw wird so oft aufgerufen, wie es die Grafikkarte hergibt
-            let self = this;
-            requestAnimationFrame(function () {
-                self.draw();
-            });
-        }
+    addMovableObjectsToMap() {
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.selectedLevel.enemies);
+        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.selectedLevel.collectableObjects);
+        this.ctx.translate(-this.camera_x, 0);
     }
 
     addObjectsToMap(objects) {
