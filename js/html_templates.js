@@ -3,6 +3,7 @@ function fillGameScreen() {
     <div class="canvas_keyboard" id="canvas_keyboard">    
         
         <!-- <div id="sceensize-button"class="sceensize-button fullscreen-button"  onclick="screensize()"></div> -->
+        <div id="explainDuringGame" class="explainDuringGame hide-mobile"><div class="edgSingle">[←] run left</div><div class="edgSingle">[→] run right</div><div class="edgSingle">[D] throw</div><div class="edgSingle">[SPACE] jump</div></div>
 
         <canvas id="canvas" width="720px" height="480px">
 
@@ -20,6 +21,7 @@ function fillGameScreen() {
         </div>
         
         <div id="switch-sound" class="switch-sound img-sound-on" onclick="switchSound()"></div>
+        
     </div>
 
     <div class="gameoverScreen" id="gameoverScreen">
@@ -44,7 +46,7 @@ function fillGameScreen() {
 function fillButton_Points_StartGame() {    
     return /*html*/`
     <div class="button-panel" id="button-panel">
-        <div class="game-button" onclick="openDialog(${getHighscore()});">         <!--getPointsoverview-->
+        <div class="game-button" onclick="openDialog(${getHighscore(1)}, ${getHighscore(2)}, 'dialog');">         <!--getPointsoverview-->
             Puntos
         </div>
         <!-- parameter of initGame represents level -->
@@ -53,6 +55,11 @@ function fillButton_Points_StartGame() {
         </div>
         
         <div id="secondLevelButton"></div>
+
+        <div class="game-button" onclick="openDialog('', '', 'dialogExplicacion');">         <!--getPointsoverview-->
+            Explicación de los botones
+        </div>
+        
     </div>
 
     <div id="dialog" class="dialog-bg d-none" onclick="hideElement('dialog');">
@@ -60,7 +67,36 @@ function fillButton_Points_StartGame() {
             <h1>Puntuación más alta</h1>
             <div class="lineInPoints">
                 <div>Level 1:</div>
-                <p id="dialog-message">No hay</p>
+                <p id="dialog-message-level-1">No hay</p>
+            </div>
+            <div class="lineInPoints">
+                <div>Level 2:</div>
+                <p id="dialog-message-level-2">No hay</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialogExplicacion" class="dialog-bg d-none" onclick="hideElement('dialogExplicacion');">
+        <div class="dialogExplicacion">
+            <div class="keysExplanation">
+                <div class="arrowsExpl">
+                    <div class="keyAndExplaination">
+                        <div>hacia atrás</div>
+                        <img src="img/Explain_arrowLeft.png" class="key-explaination-button">                    
+                    </div>
+                    <div class="keyAndExplaination">
+                        <img src="img/Explain_arrowRight.png" class="key-explaination-button">
+                        <div>adelante</div>                    
+                    </div>
+                </div>
+                <div class="keyAndExplaination">
+                    <img src="img/Explain_Space.png" class="key-explaination-button width-longer" style="position: relative">
+                    <div style="position: absolute">saltar</div>
+                </div>
+                <div class="keyAndExplaination">
+                    <img src="img/Explain_Fire.png" class="key-explaination-button">
+                    <div>botella de fuego</div>
+                </div>
             </div>
         </div>
     </div>

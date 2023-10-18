@@ -18,9 +18,9 @@ function initLevel(screenwidth, levelNumber) {
         countCloud = 4;
     } else {
         countCoins = 20;
-        countBottles = 50;
-        countChicken = 50;
-        countChick = 50;
+        countBottles = 7;
+        countChicken = 10;
+        countChick = 10;
         countCloud = 4;
     }
 
@@ -35,7 +35,7 @@ function initLevel(screenwidth, levelNumber) {
         enemiesArray[index] = chick;
     }
 
-    enemiesArray.push(new Endboss());
+    enemiesArray.push(new Endboss(levelNumber));
 
     let cloudsArray = new Array(countCloud);
     for (let index = 0; index < countCloud; index++) {

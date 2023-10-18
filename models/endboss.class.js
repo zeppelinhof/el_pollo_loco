@@ -13,6 +13,7 @@ class Endboss extends MovableObject {
     alerted = true;
     attacking = false;
     hurted = false;
+    levelNumber;
 
     endbossDead_sound = new Audio('audio/endbossDead.mp3')
 
@@ -57,7 +58,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
-    constructor() {
+    constructor(levelNumber) {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
@@ -66,6 +67,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.x = level_end_x + 100;
         this.idleEndboss();
+        this.levelNumber = levelNumber;
     }
 
     idleEndboss() {
@@ -166,7 +168,7 @@ class Endboss extends MovableObject {
             setTimeout(() => {
                 stopSpecialInterval(endbossExploding);
                 this.fallDownwards();
-                showLevelFinished();
+                showLevelFinished(this.levelNumber);
             }, 2000);
         }
     }

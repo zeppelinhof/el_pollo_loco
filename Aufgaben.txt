@@ -19,7 +19,7 @@ Aufgaben:
 ✔ Fullscreen-Modus (canvas.requestFullscreen)
 ✔ alle Sounds über playSound() abspielen --> Taste Musik ausschalten (if Bedingung um playSound)
 ✔ zweites Level
-• Erklärung der Spieltasten für Spieler
+• Erklärung der Spieltasten für Spieler --> onhover einblenden
 
 
 

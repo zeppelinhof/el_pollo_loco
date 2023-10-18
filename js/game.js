@@ -13,6 +13,11 @@ function initStartscreen() {
     checkSecondLevelButton();
 }
 
+/**
+ * start game after click on button "Empezar Nivel"
+ * 
+ * @param {string} levelNumber - variable to represent level  1 or 2
+ */
 function initGame(levelNumber) {
     hideElement('gameTitle');
     soundON = true;
@@ -25,27 +30,40 @@ function initGame(levelNumber) {
     world = new World(canvas, keyboard, levelNumber);
 }
 
+/**
+ * screen when lost game
+ */
 function showGameover() {
     stopGame();
-    hideElement('canvas');
-    hideElement('levelFinishedScreen');
-    hideElement('switch-sound');
+    showOnlySignificantScreen('levelFinishedScreen');
     showScreen('gameoverScreen');
     hideElement('mobileKeyboard');
+    switchClass('button-panel', 'button-panel', false);
+    switchClass('button-panel', 'd-flex', true);
 }
 
-function showLevelFinished() {
+/**
+ * screen when kill endboss
+ * 
+ * @param {string} levelNumber - variable to represent level  1 or 2
+ */
+function showLevelFinished(levelNumber) {
     stopAllSounds();
     stopGame();
-    hideElement('canvas');
-    hideElement('gameoverScreen');
-    hideElement('switch-sound');
-    if (getTempHighscore() > getHighscore()) {
-        setHighscore(getTempHighscore());
+    showOnlySignificantScreen('gameoverScreen');
+    if (getTempHighscore(levelNumber) > getHighscore(levelNumber)) {
+        setHighscore(getTempHighscore(levelNumber), levelNumber);
     }
     showScreen('levelFinishedScreen');
     enableSecondLevel();
     checkSecondLevelButton();
+}
+
+function showOnlySignificantScreen(screenToHide){
+    hideElement('canvas');
+    hideElement(screenToHide);
+    hideElement('switch-sound');
+    hideElement('explainDuringGame');
 }
 
 function addButtons(element) {

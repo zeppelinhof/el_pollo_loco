@@ -21,9 +21,13 @@ h1 {
 canvas {
     background-color: black;
     display: block;
+    border: 3px solid rgba(255 255 255 / 100%);
 }
 
 .game-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     background-color: white;
     border-radius: 10px;
@@ -33,7 +37,9 @@ canvas {
 
 .button-panel {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 12px;
 }
 
@@ -86,6 +92,36 @@ canvas {
     display: block;     
 }
 
+.keysExplanation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Arbutus';
+    gap: 24px;
+}
+
+.key-explaination-button{
+    width: 30px;
+    height: 30px;
+}
+
+.keyAndExplaination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.arrowsExpl{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.width-longer{
+    width: 120px;
+}
+
 .canvas_keyboard {
     position: relative;
     display: flex;
@@ -105,6 +141,29 @@ canvas {
     background-repeat: no-repeat;    
 }
 
+.explainDuringGame{
+    position: absolute;
+    width: 100%;
+    display: flex;    
+    justify-content: space-around;
+    top: 6px;
+    height: 40px; 
+    font-family: 'Arbutus';
+    color: brown;
+    /* background-color: blue; */
+}
+
+.edgSingle{
+    height: 18px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
+    box-shadow: 10px 5px 5px rgba(0 0 0 / 20%);
+}
+
 .img-sound-on{
     background-image: url('img/sound_off.png');
 }
@@ -119,7 +178,7 @@ canvas {
     font-size: 32px;
     color: white;
     align-items: center;
-    gap: 12px;
+    gap: 52px;
 }
 
 .puntosPanel2 {
@@ -131,14 +190,22 @@ canvas {
     flex-direction: column;
 }
 
-#puntosValue {
+#puntosValueLevelfinished {
+    font-size: 60px;
+    color: #FFB300;
+}
+#puntosValueGameover {
     font-size: 60px;
     color: #FFB300;
 }
 
 .nivelCompletadoText {
     font-family: 'Arbutus';
-    color: white;
+    color: black;
+}
+
+.puntosText{
+    color: black;
 }
 
 .pointsOverview {
@@ -164,6 +231,19 @@ canvas {
 .dialog {
     height: 50vh;
     width: 50vw;
+    min-height: 100px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.dialogExplicacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    min-width: 200px;
     min-height: 100px;
     background-color: white;
     border: 1px solid lightgray;
@@ -204,6 +284,11 @@ canvas {
     top: 5px;
     height: 5px;
     background-color: #28518B;
+}
+
+.d-flex{
+    display: flex;
+    gap: 12px;
 }
 
 /*#region Smartphones  */
