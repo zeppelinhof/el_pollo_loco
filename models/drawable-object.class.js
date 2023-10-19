@@ -26,10 +26,10 @@ class DrawableObject {
     }
 
     draw(ctx) {
-        try{
+        try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         }
-        catch(e){
+        catch (e) {
             console.log('Die Source:', this.img);
         }
     }
@@ -54,7 +54,7 @@ class DrawableObject {
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
-    }    
+    }
 
     randomPosition(startPoint) {
         return startPoint + Math.random() * (level_end_x);

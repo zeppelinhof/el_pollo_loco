@@ -122,8 +122,8 @@ class Endboss extends MovableObject {
             setTimeout(() => {
                 this.nextAnimation_Alerted();
                 this.switchAnimation_Alert_Attack(true, false)
-                this.comeNearer(20);
-            }, 500);
+                this.comeNearer(50);
+            }, 1000 / 5);
         }
     }
 

@@ -29,7 +29,7 @@ function fillGameScreen() {
 
     <div class="gameoverScreen" id="gameoverScreen">
         <div class="puntosPanel" >
-            <div class=puntosText>Puntos alcanzados:</div>
+            <div class=puntosText>Puntos:</div>
             <div id="puntosValueGameover"></div>
         </div>                
     </div>
@@ -38,7 +38,7 @@ function fillGameScreen() {
         <div class="puntosPanel flex-column">
             <div class="nivelCompletadoText hide-mobile">Nivel completado</div>    
             <div class="puntosPanel2">                        
-                <div class=puntosText>Puntos alcanzados:</div>
+                <div class=puntosText>Puntos:</div>
                 <div id="puntosValueLevelfinished"></div>
             </div>                    
         </div>                            
@@ -57,7 +57,8 @@ function fillButton_Points_StartGame() {
         Empezar Nivel 1
         </div>
         
-        <div id="secondLevelButton"></div>
+        <div id="secondLevelButton" style="display: flex"></div>
+        <!-- ${fillSecondLevelButton()} -->
 
         <div class="game-button padding-12-mobile" onclick="openDialog('', '', 'dialogExplicacion');">         <!--getPointsoverview-->
             Explicación de los botones

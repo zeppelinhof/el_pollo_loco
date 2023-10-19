@@ -20,6 +20,7 @@ class World {
     bottle_sound = new Audio('audio/bottle.mp3')
 
     runDraw = true;
+    previousBottleIsFlying = false;
 
     constructor(canvas, keyboard, levelNumber) {
         if (levelNumber == '1') {
@@ -141,13 +142,23 @@ class World {
      */
     checkThrowObjects() {
         if (this.keyboard.D) {
-            if (this.collectedBottlesCount > 0) {
+            if (this.availableBottles_And_LoadingTimeReached()) {
+                this.previousBottleIsFlying = true;
                 let bottle = new Bottle(this.character.x + 50, this.character.y + 100, world, this.character.otherDirection);
                 this.throwableObjects.push(bottle);
                 this.collectedBottlesCount--;
                 this.statusBarBottles.setPercentage(this.collectedBottlesCount);
+
+                // After a second Pepe can throw a bottle again ("loading time")
+                setTimeout(()=>{
+                    this.previousBottleIsFlying = false;
+                }, 1000);
             }
         }
+    }
+
+    availableBottles_And_LoadingTimeReached(){
+        return this.collectedBottlesCount > 0 && this.previousBottleIsFlying == false;
     }
 
     draw() {

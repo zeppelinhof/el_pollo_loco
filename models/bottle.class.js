@@ -2,7 +2,7 @@ class Bottle extends ThrowableObject {
 
     isSplashed = false;
     timeoutSplashOn = false;
-    enemyHit;
+    enemyHit;    
 
     splash_sound = new Audio('audio/splash.mp3')
 

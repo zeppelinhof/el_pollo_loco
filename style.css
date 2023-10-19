@@ -21,7 +21,6 @@ h1 {
 canvas {
     background-color: black;
     display: block;
-    border: 3px solid rgba(255 255 255 / 100%);
 }
 
 .game-button {
@@ -287,14 +286,14 @@ canvas {
     gap: 12px;
 }
 
-/*#region Smartphones  */
-@media only screen and (max-width: 720px) {
+/*#region Smartphones (Mobile)  */
+@media only screen and (max-width: 1200px), (max-height: 480px) {
     canvas {
-        width: 100%;
+        width: 100%;        
     }
 
     .gameoverScreen {
-        width: 100vw;
+        width: 100%;             
     }
 
     .levelFinishedScreen {
@@ -304,19 +303,8 @@ canvas {
     h1 {
         font-size: 18px;
     }
-}
-
-/* Wenn Höhe kleiner als Spielscreen-Höhe, dann Höhe Spielscreen-Höhe komplette Bildschirm-Höhe füllen*/
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
 
     .levelFinishedScreen {
-        height: 100vh;
-    }
-
-    .gameoverScreen {
         height: 100vh;
     }
 
@@ -389,6 +377,15 @@ canvas {
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         border-radius: 20px;
     }
+}
+
+/* Wenn Höhe kleiner als Spielscreen-Höhe, dann Höhe Spielscreen-Höhe komplette Bildschirm-Höhe füllen*/
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+
+    
 }
 
 
