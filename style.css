@@ -14,7 +14,6 @@ body {
 
 h1 {
     font-family: 'Arbutus';
-    font-size: 48px;
     color: saddlebrown;
 }
 
@@ -224,9 +223,10 @@ canvas {
 }
 
 .dialog {
-    height: 50vh;
-    width: 50vw;
-    min-height: 100px;
+    height: 30vh;
+    width: 40vw;
+    min-height: 150px;
+    max-width: 500px;
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 10px;
