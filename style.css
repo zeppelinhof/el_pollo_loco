@@ -9,7 +9,10 @@ body {
     background-position: center;
     margin: 0;
     height: 100vh;
-    /* position: relative; */
+}
+
+.disable-selection {
+    user-select: none;
 }
 
 h1 {
@@ -289,6 +292,9 @@ canvas {
 
 /*#region Smartphones (Mobile)  */
 @media only screen and (max-width: 1200px), (max-height: 480px) {
+
+    
+
     canvas {
         width: 100%;        
     }
@@ -385,6 +391,14 @@ canvas {
     canvas {
         height: 100vh;
     }
+
+    /* body {
+        background-image: url('img/desert-game-background_rotate.jpg');
+        transform: rotate(90deg);
+        transform-origin: center;
+        overflow-x: hidden;
+        width: 100vh;
+    } */
 
     
 }
