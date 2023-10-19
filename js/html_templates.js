@@ -71,11 +71,13 @@ function fillButton_Points_StartGame() {
             <h1>Puntuación más alta</h1>
             <div class="lineInPoints">
                 <div>Level 1:</div>
-                <p id="dialog-message-level-1">No hay</p>
+                <p id="dialog-message-level-1">0</p>
+                <p>(10 son accesibles)</p>
             </div>
             <div class="lineInPoints">
                 <div>Level 2:</div>
-                <p id="dialog-message-level-2">No hay</p>
+                <p id="dialog-message-level-2">0</p>
+                <p>(20 son accesibles)</p>
             </div>
         </div>
     </div>

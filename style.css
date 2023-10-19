@@ -235,6 +235,7 @@ canvas {
     width: 40vw;
     min-height: 150px;
     max-height: 170px;
+    min-width: 350px;
     max-width: 500px;
     background-color: white;
     border: 1px solid lightgray;
