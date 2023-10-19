@@ -76,7 +76,7 @@ class Endboss extends MovableObject {
     idleEndboss() {
         setSpecialInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
-            if (this.isHurt()) {
+            if (this.characterNearEndboss()) {
                 this.activeEndboss();
                 stopSpecialInterval(idleEndboss);
             }
@@ -167,6 +167,10 @@ class Endboss extends MovableObject {
 
     nextAnimation_Dead() {
         this.switchAnimation_On_Off(false, false, false);
+    }
+
+    characterNearEndboss(){
+        return world.character.x > level_end_x - 300;
     }
 
     /**
