@@ -1,6 +1,6 @@
-Jump Animation langsamer nur 1x
-Boss schwerer zu besiegen
-nach jedem Wurf Pause, damit nicht wie Maschinengewehr
+✔Jump Animation langsamer nur 1x
+✔Boss schwerer zu besiegen
+✔nach jedem Wurf Pause, damit nicht wie Maschinengewehr
 ✔Responsive bei Gameover (früher Responsive)
-character	> animate etwas kürzer
-		> Intervalle in eins, wenn langhsamer dann eigene playAnimation (playSlowAnimation bzw currentImage)
+character	✔ animate etwas kürzer
+		ok Intervalle in eins, wenn langhsamer dann eigene playAnimation (playSlowAnimation bzw currentImage)

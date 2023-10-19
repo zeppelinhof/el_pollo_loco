@@ -100,7 +100,7 @@ class Character extends MovableObject {
             if (!this.isDead()) {
                 this.runAnimation();
             }
-
+            
         }, 1000 / 60);
 
         setGeneralInterval(() => {
