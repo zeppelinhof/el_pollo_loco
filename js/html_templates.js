@@ -6,7 +6,7 @@ function fillGameScreen() {
     <div class="canvas_keyboard" id="canvas_keyboard">    
         
         <!-- <div id="sceensize-button"class="sceensize-button fullscreen-button"  onclick="screensize()"></div> -->
-        <div id="explainDuringGame" class="explainDuringGame hide-mobile"><div class="edgSingle">[←] run left</div><div class="edgSingle">[→] run right</div><div class="edgSingle">[D] throw</div><div class="edgSingle">[SPACE] jump</div></div>
+        <div id="explainDuringGame" class="explainDuringGame hide-mobile"><div class="edgSingle">[←] rückwärts</div><div class="edgSingle">[→] vorwärts</div><div class="edgSingle">[D] werfen</div><div class="edgSingle">[SPACE] springen</div></div>
 
         <canvas id="canvas" width="720px" height="480px">
 
@@ -50,34 +50,34 @@ function fillButton_Points_StartGame() {
     return /*html*/`
     <div class="button-panel" id="button-panel">
         <div class="game-button padding-12-mobile" onclick="openDialog(${getHighscore(1)}, ${getHighscore(2)}, 'dialog');">         <!--getPointsoverview-->
-            Puntos
+            Punkte
         </div>
         <!-- parameter of initGame represents level -->
         <div onclick="initGame('1'); runEventlisteners();" class="game-button black-background padding-12-mobile">
-        Empezar Nivel 1
+        Level 1 starten
         </div>
         
         <div id="secondLevelButton" style="display: flex"></div>
         <!-- ${fillSecondLevelButton()} -->
 
         <div class="game-button padding-12-mobile" onclick="openDialog('', '', 'dialogExplicacion');">         <!--getPointsoverview-->
-            Explicación de los botones
+            Tastenbelegung
         </div>
         
     </div>
 
     <div id="dialog" class="dialog-bg d-none" onclick="hideElement('dialog');">
         <div class="dialog">
-            <h1>Puntuación más alta</h1>
+            <h1>Highscores</h1>
             <div class="lineInPoints">
                 <div>Level 1:</div>
                 <p id="dialog-message-level-1">0</p>
-                <p>(10 son accesibles)</p>
+                <p>(10 sind erreichbar)</p>
             </div>
             <div class="lineInPoints">
                 <div>Level 2:</div>
                 <p id="dialog-message-level-2">0</p>
-                <p>(20 son accesibles)</p>
+                <p>(20 sind erreichbar)</p>
             </div>
         </div>
     </div>
@@ -87,21 +87,21 @@ function fillButton_Points_StartGame() {
             <div class="keysExplanation">
                 <div class="arrowsExpl">
                     <div class="keyAndExplaination">
-                        <div>hacia atrás</div>
+                        <div>rückwärts</div>
                         <img src="img/Explain_arrowLeft.png" class="key-explaination-button">                    
                     </div>
                     <div class="keyAndExplaination">
                         <img src="img/Explain_arrowRight.png" class="key-explaination-button">
-                        <div>adelante</div>                    
+                        <div>vorwärts</div>                    
                     </div>
                 </div>
                 <div class="keyAndExplaination">
                     <img src="img/Explain_Space.png" class="key-explaination-button width-longer" style="position: relative">
-                    <div style="position: absolute">saltar</div>
+                    <div style="position: absolute">springen</div>
                 </div>
                 <div class="keyAndExplaination">
                     <img src="img/Explain_Fire.png" class="key-explaination-button">
-                    <div>botella de fuego</div>
+                    <div>Flasche werfen</div>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@ function fillPointsOverview() {
 function fillSecondLevelButton(){
     return /*html*/`
     <div onclick="initGame('2'); runEventlisteners();" class="game-button black-background padding-12-mobile">
-        Empezar Nivel 2
+    Level 2 starten
     </div>
     `   
 }

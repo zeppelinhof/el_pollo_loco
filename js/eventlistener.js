@@ -1,5 +1,6 @@
 //#region Eventlistener
 function runEventlisteners() {
+    background_sound.addEventListener('ended', restartBackgroundSound);
 
     addEventListenerToButtons();
 
@@ -57,6 +58,12 @@ function runEventlisteners() {
             throwBottle(false);
         }
     });
+
+    function restartBackgroundSound() {
+        background_sound.currentTime = 0;
+        background_sound.play();
+    }
+
 }
 
 function addEventListenerToButtons() {
@@ -72,11 +79,23 @@ function addEventListenerToButtons() {
     let buttonJump = document.getElementById('buttonJump');
     buttonJump.addEventListener("touchstart", onTouchStartJump);
     buttonJump.addEventListener("touchend", onTouchEndJump);
-    
+
 
     let buttonThrowBottle = document.getElementById('buttonThrowBottle');
     buttonThrowBottle.addEventListener("touchstart", onTouchStartThrowBottle);
     buttonThrowBottle.addEventListener("touchend", onTouchEndThrowBottle);
+
+    // set to each play button not to open context menu when click a few seconds
+    [buttonRight, buttonLeft, buttonJump, buttonThrowBottle].forEach(btn =>{
+        avoidContextmenu(btn);
+    })
+
+}
+
+function avoidContextmenu(button) {
+    button.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+    });
 }
 
 function onTouchStartRight() {
@@ -113,28 +132,28 @@ function onTouchEndThrowBottle() {
 
 function right(bool) {
     keyboard.RIGHT = bool;
-    if(bool){
+    if (bool) {
         resetTimer();
     }
 }
 
 function left(bool) {
     keyboard.LEFT = bool;
-    if(bool){
+    if (bool) {
         resetTimer();
     }
 }
 
 function jump(bool) {
     keyboard.SPACE = bool;
-    if(bool){
+    if (bool) {
         resetTimer();
     }
 }
 
 function throwBottle(bool) {
     keyboard.D = bool;
-    if(bool){
+    if (bool) {
         resetTimer();
     }
 }

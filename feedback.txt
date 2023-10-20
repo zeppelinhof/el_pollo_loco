@@ -4,3 +4,15 @@
 ✔Responsive bei Gameover (früher Responsive)
 character	✔ animate etwas kürzer
 		ok Intervalle in eins, wenn langhsamer dann eigene playAnimation (playSlowAnimation bzw currentImage)
+------------
+✔Deutsch
+✔Favicon
+✔Title nicht Document
+✔Overlay: Man sollte Hand drehen
+✔ in Mobile länger auf links öffnet Kontext Menü!
+✔in mobile Quer soll nicht scrollbar sein
+✔anderes Werfen Icon
+✔ Funktion in Levelparameters kürzen
+✔Hintergrundmusik
+
+✔Klasse World mehr Dokumentation

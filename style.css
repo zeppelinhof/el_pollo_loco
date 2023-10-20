@@ -1,6 +1,8 @@
-html, body {
+html,
+body {
     user-select: none;
-    -webkit-user-select: none; /* Für ältere iOS-Versionen (z. B. iOS 10) */
+    -webkit-user-select: none;
+    /* Für ältere iOS-Versionen (z. B. iOS 10) */
 }
 
 body {
@@ -70,7 +72,7 @@ canvas {
 
 .gameoverScreen {
     width: 720px;
-    height: 480px;
+    height: 100vh;
     background-image: url('img/9_intro_outro_screens/game_over/game over!.png');
     background-size: cover;
     background-position: center;
@@ -90,11 +92,11 @@ canvas {
     justify-content: center;
 }
 
-.gameScreen {    
-    display: block;     
+.gameScreen {
+    display: block;
 }
 
-.keysExplanation{
+.keysExplanation {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,25 +104,25 @@ canvas {
     gap: 24px;
 }
 
-.key-explaination-button{
+.key-explaination-button {
     width: 30px;
     height: 30px;
 }
 
-.keyAndExplaination{
+.keyAndExplaination {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
 }
 
-.arrowsExpl{
+.arrowsExpl {
     display: flex;
     justify-content: center;
     gap: 12px;
 }
 
-.width-longer{
+.width-longer {
     width: 120px;
 }
 
@@ -129,33 +131,33 @@ canvas {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;   
+    align-items: center;
 }
 
-.switch-sound{
+.switch-sound {
     position: absolute;
     bottom: 0;
     left: 45%;
     width: 40px;
-    height: 40px;    
+    height: 40px;
     background-size: contain;
     background-position: center;
-    background-repeat: no-repeat;    
+    background-repeat: no-repeat;
 }
 
-.explainDuringGame{
+.explainDuringGame {
     position: absolute;
     width: 100%;
-    display: flex;    
+    display: flex;
     justify-content: space-around;
     top: 6px;
-    height: 40px; 
+    height: 40px;
     font-family: 'Arbutus';
     color: brown;
     /* background-color: blue; */
 }
 
-.edgSingle{
+.edgSingle {
     height: 18px;
     display: flex;
     align-items: center;
@@ -166,11 +168,11 @@ canvas {
     box-shadow: 10px 5px 5px rgba(0 0 0 / 20%);
 }
 
-.img-sound-on{
+.img-sound-on {
     background-image: url('img/sound_off.png');
 }
 
-.img-sound-off{
+.img-sound-off {
     background-image: url('img/sound_on.png');
 }
 
@@ -185,6 +187,7 @@ canvas {
 
 .puntosPanel2 {
     display: flex;
+    align-items: center;
     gap: 12px;
 }
 
@@ -196,6 +199,7 @@ canvas {
     font-size: 60px;
     color: #FFB300;
 }
+
 #puntosValueGameover {
     font-size: 60px;
     color: #FFB300;
@@ -206,7 +210,7 @@ canvas {
     color: black;
 }
 
-.puntosText{
+.puntosText {
     color: black;
 }
 
@@ -269,14 +273,14 @@ canvas {
     display: none;
 }
 
-.sceensize-button{
-    position: absolute;    
+.sceensize-button {
+    position: absolute;
     right: 50%;
     width: 40px;
     cursor: pointer;
 }
 
-.fullscreen-button {    
+.fullscreen-button {
     top: 0;
     height: 40px;
     background-image: url('img/full-screen.png');
@@ -285,28 +289,50 @@ canvas {
     background-repeat: no-repeat;
 }
 
-.not-fullscreen-button{
+.not-fullscreen-button {
     top: 5px;
     height: 5px;
     background-color: #28518B;
 }
 
-.d-flex{
+.turnSmartphone{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Arbutus';
+    color: white; 
+    font-size: 24px;
+    gap: 50px;
+    background-color: rgba(114, 114, 114, 0.8); 
+}
+
+.textTurnSmartphone{
+    text-align: center; 
+    box-shadow: 0 0 8px 8px rgba(0 0 0 / 30%);
+    width: 100vw;
+}
+
+.d-flex {
     display: flex;
     gap: 12px;
 }
 
 /*#region Smartphones (Mobile)  */
-@media only screen and (max-width: 1200px), (max-height: 480px) {
+@media only screen and (max-width: 1200px),
+(max-height: 480px) {
 
-    
+
 
     canvas {
-        width: 100%;        
+        width: 100%;
     }
 
     .gameoverScreen {
-        width: 100%;             
+        width: 100vw;
     }
 
     .levelFinishedScreen {
@@ -325,11 +351,7 @@ canvas {
         display: none;
     }
 
-    h1 {
-        font-size: 18px;
-    }
-
-    .padding-12-mobile{
+    .padding-12-mobile {
         padding: 12px;
     }
 
@@ -383,11 +405,14 @@ canvas {
     .mobileThrowBottle {
         position: absolute;
         height: 40px;
-        width: 70px;
+        width: 100px;
         top: calc(50% - 10px);
         right: 20%;
-        background: linear-gradient(to bottom, #fd8367, #FF0C00);
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        background-image: url('img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
         border-radius: 20px;
     }
 }
@@ -397,17 +422,23 @@ canvas {
     canvas {
         height: 100vh;
     }
-
-    /* body {
-        background-image: url('img/desert-game-background_rotate.jpg');
-        transform: rotate(90deg);
-        transform-origin: center;
-        overflow-x: hidden;
-        width: 100vh;
-    } */
-
-    
 }
 
+@media (orientation: portrait) {
+
+    .turnSmartphone img { 
+        width: 30vw;
+        transform: rotate(-45deg);
+        transition: transform 3s;
+    }
+}
+
+/* Stilregeln für den Querformatmodus */
+@media (orientation: landscape) {
+
+    .turnSmartphone{
+        display: none;
+    }
+}
 
 /*#endregion Smartphones  */

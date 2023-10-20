@@ -10,7 +10,6 @@ class ChickDead extends ChickenDead {
     constructor(chickX) {
         super().loadImage('img/3_enemies_chicken/chicken_small/2_dead/dead.png');
         this.loadImages(this.IMAGE_DEAD);
-
         this.x = chickX;
         this.speed = 0;
         this.animate();

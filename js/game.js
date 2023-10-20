@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let screenMaximised = false;
 let soundON;
+let background_sound = new Audio('audio/background_music.mp3');
 let level_end_x = 2200;
 let screenwidth = 720;
 let countBackgroundObjects = Math.round(level_end_x / screenwidth) + 2;
@@ -11,6 +12,7 @@ let countBackgroundObjects = Math.round(level_end_x / screenwidth) + 2;
 function initStartscreen() {
     document.getElementById('gameScreen').innerHTML = fillButton_Points_StartGame();
     checkSecondLevelButton();
+    hideElementAfterTime('gameTitle', 5000);
 }
 
 /**
@@ -21,12 +23,13 @@ function initStartscreen() {
 function initGame(levelNumber) {
     hideElement('gameTitle');
     soundON = true;
+    playSound(background_sound);
     document.getElementById('gameScreen').innerHTML = fillGameScreen();
 
     hideElement('gameoverScreen');
     hideElement('levelFinishedScreen');
     canvas = document.getElementById('canvas');
-    initLevel(screenwidth, levelNumber);
+    initLevel(levelNumber);
     world = new World(canvas, keyboard, levelNumber);
 }
 
@@ -34,6 +37,7 @@ function initGame(levelNumber) {
  * screen when lost game
  */
 function showGameover() {
+    stopAllSounds();
     stopGame();
     showOnlySignificantScreen('levelFinishedScreen');
     showScreen('gameoverScreen');
@@ -51,9 +55,11 @@ function showLevelFinished(levelNumber) {
     stopAllSounds();
     stopGame();
     showOnlySignificantScreen('gameoverScreen');
+
     if (getTempHighscore(levelNumber) > getHighscore(levelNumber)) {
         setHighscore(getTempHighscore(levelNumber), levelNumber);
     }
+    
     showScreen('levelFinishedScreen');
     enableSecondLevel();
     checkSecondLevelButton();
@@ -143,19 +149,23 @@ function playSound(objsound) {
 
 function stopSound(objsound) {
     objsound.pause();
+    objsound.currentTime = 0;
 }
 
 function stopAllSounds() {
     stopSound(world.character.walking_sound);
+    stopSound(background_sound);
 }
 
 // if sound is on (sound button for off visible) and button is clicked then switch sound off and show button for switch on
 function switchSound() {
     if (soundON) {
-        changeSoundButton(false, true)
+        changeSoundButton(false, true);
+        stopSound(background_sound);
 
     } else {
-        changeSoundButton(true, false)
+        changeSoundButton(true, false);
+        playSound(background_sound);
     }
 }
 
@@ -202,4 +212,10 @@ function checkSecondLevelButton() {
     if (secondLevelEnabled()) {
         document.getElementById('secondLevelButton').innerHTML += fillSecondLevelButton();
     }
+}
+
+function hideElementAfterTime(obj, time){
+    setTimeout(()=>{
+        hideElement(obj);
+    }, time);
 }

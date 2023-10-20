@@ -128,6 +128,13 @@ class World {
         playSound(this.coin_sound);
     }
 
+    /**
+     * 
+     * @param {string} objName - e.g. "Chicken"
+     * @param {object} obj - object of enemy
+     * @param {number} o - index of object in Array
+     * @returns 
+     */
     typeOfObjectIs(objName, obj, o) {
         try {
             return obj[obj.indexOf(o)].constructor.name == objName;
@@ -157,18 +164,25 @@ class World {
         }
     }
 
+    /**
+     * 
+     * @returns if there are Bottles to throw and loading time is reached
+     */
     availableBottles_And_LoadingTimeReached(){
         return this.collectedBottlesCount > 0 && this.previousBottleIsFlying == false;
     }
 
+    /**
+     * draw objects to canvas
+     * function draw is called as often as the graphics card allows
+     */
     draw() {
         this.addStaticObjectsToMap();
 
         // draw movable objects but interupt to draw character, enemies, bottles if Pepe is Dead
         if (this.runDraw) {
             this.addMovableObjectsToMap();
-
-            // draw wird so oft aufgerufen, wie es die Grafikkarte hergibt
+            
             let self = this;
             requestAnimationFrame(function () {
                 self.draw();
@@ -216,6 +230,10 @@ class World {
         }
     }
 
+    /**
+     * 
+     * @param {obj} mo - movable object is reflected (flipped) to walk into another direction
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
