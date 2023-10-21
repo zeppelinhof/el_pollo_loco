@@ -5,9 +5,9 @@ let countChick;
 let countCloud;
 let level1;
 let level2;
-let screenwidthN1 = screenwidth - 1;   
-let enemiesArray = new Array(countChicken);
-let cloudsArray = new Array(countCloud);
+let screenwidthN1 = screenwidth - 1;
+let enemiesArray;
+let cloudsArray;
 let collectableObjectsArray;
 
 /**
@@ -17,40 +17,12 @@ let collectableObjectsArray;
  * @param {string} levelNumber 
  */
 function initLevel(levelNumber) {
-
     setLevelParameters(levelNumber);
-
+    enemiesArray = new Array(countChicken);
+    cloudsArray = new Array(countCloud);
     setMovableObjectsArrays(levelNumber);
-
-     
-    backgroundArray = [
-
-        new BackgroundObject('img/5_background/layers/air.png', -(screenwidthN1)),
-        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', -(screenwidthN1)),
-        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', -(screenwidthN1)),
-        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', -(screenwidthN1)),
-    ];
-
-    for (let i = 0; i < countBackgroundObjects; i += 2) {
-        createBackgroundObject(i);
-    }
-
-    if (levelNumber == '1') {
-        level1 = new Level(
-            enemiesArray,
-            cloudsArray,
-            backgroundArray,
-            collectableObjectsArray
-        );
-    } else {
-        level2 = new Level(
-            enemiesArray,
-            cloudsArray,
-            backgroundArray,
-            collectableObjectsArray
-        );
-    }
-
+    setBackground();
+    decisionLevel1Or2(levelNumber);
 }
 
 /**
@@ -73,6 +45,29 @@ function createBackgroundObject(i) {
     }
 }
 
+/**
+ * create level object for level 1 or 2
+ * 
+ * @param {string} levelNumber 
+ */
+function decisionLevel1Or2(levelNumber) {
+    if (levelNumber == '1') {
+        level1 = new Level(
+            enemiesArray,
+            cloudsArray,
+            backgroundArray,
+            collectableObjectsArray
+        );
+    } else {
+        level2 = new Level(
+            enemiesArray,
+            cloudsArray,
+            backgroundArray,
+            collectableObjectsArray
+        );
+    }
+}
+
 function setLevelParameters(levelNumber) {
     if (levelNumber == '1') {
         countCoins = 10;
@@ -89,11 +84,15 @@ function setLevelParameters(levelNumber) {
     }
 }
 
-function setMovableObjectsArrays(levelNumber) {    
+/**
+ * set arrays for enemies and collectable objects
+ * 
+ * @param {string} levelNumber 
+ */
+function setMovableObjectsArrays(levelNumber) {
 
     createChickenArray(enemiesArray);
     createChickArray(enemiesArray);
-
     enemiesArray.push(new Endboss(levelNumber));
 
     createCloudsArray();
@@ -103,12 +102,22 @@ function setMovableObjectsArrays(levelNumber) {
     createCollectableObjectsArray(collectableObjectsArray);
 }
 
-function createChickenArray(enemiesArray) {
-    for (let index = 0; index < countChicken; index++) {
-        let chicken = new Chicken();
-        enemiesArray[index] = chicken;
+/**
+ * set backgrounds as queue of images
+ */
+function setBackground() {
+    backgroundArray = [
+        new BackgroundObject('img/5_background/layers/air.png', -(screenwidthN1)),
+        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', -(screenwidthN1)),
+        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', -(screenwidthN1)),
+        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', -(screenwidthN1)),
+    ];
+
+    for (let i = 0; i < countBackgroundObjects; i += 2) {
+        createBackgroundObject(i);
     }
 }
+
 function createChickArray(enemiesArray) {
     for (let index = countChicken; index < countChicken + countChick; index++) {
         let chick = new Chick();
@@ -116,21 +125,33 @@ function createChickArray(enemiesArray) {
     }
 }
 
+function createChickenArray(enemiesArray) {
+    for (let index = 0; index < countChicken; index++) {
+        let chicken = new Chicken();
+        enemiesArray[index] = chicken;
+    }
+}
+
 function createCloudsArray() {
-    
+
     for (let index = 0; index < countCloud; index++) {
         let cloud = new Cloud();
         cloudsArray[index] = cloud;
     }
 }
 
-function createCoinsArray(collectableObjectsArray) {    
+function createCoinsArray(collectableObjectsArray) {
     for (let index = 0; index < countCoins; index++) {
         let coin = new Coin();
         collectableObjectsArray[index] = coin;
     }
 }
 
+/**
+ * to check and organize if Pepe collected one collectable object
+ * 
+ * @param {Array} collectableObjectsArray - includes coins and bottles
+ */
 function createCollectableObjectsArray(collectableObjectsArray) {
     for (let index = countCoins; index < collectableObjectsArray.length; index++) {
         let bottle = new BottleCollectable();

@@ -22,4 +22,4 @@ character	✔ animate etwas kürzer
 ✔ nicht sterben, wenn vor/im Huhn hochspringen (evtl. fromAbove)
 ✔Kollision etwas zu spät
 ✔Abstand zwischen Buttons bei Gameover gleichmäßig 
-levelParameters initLevel kürzer
+✔levelParameters initLevel kürzer
