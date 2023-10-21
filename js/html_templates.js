@@ -57,7 +57,7 @@ function fillButton_Points_StartGame() {
         Level 1 starten
         </div>
         
-        <div id="secondLevelButton" style="display: flex"></div>
+        <div id="secondLevelButton" class="d-none"></div>
         <!-- ${fillSecondLevelButton()} -->
 
         <div class="game-button padding-12-mobile" onclick="openDialog('', '', 'dialogExplicacion');">         <!--getPointsoverview-->
@@ -100,7 +100,7 @@ function fillButton_Points_StartGame() {
                     <div style="position: absolute">springen</div>
                 </div>
                 <div class="keyAndExplaination">
-                    <img src="img/Explain_Fire.png" class="key-explaination-button">
+                    <div>[D]</div>
                     <div>Flasche werfen</div>
                 </div>
             </div>

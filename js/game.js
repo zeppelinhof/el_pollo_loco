@@ -211,6 +211,7 @@ function checkSecondLevelButton() {
     document.getElementById('secondLevelButton').innerHTML = '';
     if (secondLevelEnabled()) {
         document.getElementById('secondLevelButton').innerHTML += fillSecondLevelButton();
+        showElement('secondLevelButton');
     }
 }
 

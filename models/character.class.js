@@ -5,11 +5,12 @@ class Character extends MovableObject {
 
     offset = {
         top: 120,
-        left: 30,
-        right: 40,
+        left: 10,
+        right: 20,
         bottom: 30
     }
 
+    hitable = true;
     notSetted = true;
     setIntervalCounter = 0;
 
@@ -96,7 +97,6 @@ class Character extends MovableObject {
      */
     animate() {
         setGeneralInterval(() => {
-
             if (!this.isDead()) {
                 this.runAnimation();
             }
@@ -116,7 +116,7 @@ class Character extends MovableObject {
      * when jump on enemy Pepe pushes away from the opponent a little (30)
      */
     jump() {
-        this.speedY = 30;
+        this.speedY = 30;        
     }
 
     hurtJumpWalkAnimation() {
@@ -175,5 +175,9 @@ class Character extends MovableObject {
         }
 
         this.world.camera_x = -this.x + 100;
+    }
+
+    isFlyingDown(){
+        return this.speedY < 0;
     }
 }

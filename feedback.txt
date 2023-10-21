@@ -16,3 +16,10 @@ character	✔ animate etwas kürzer
 ✔Hintergrundmusik
 
 ✔Klasse World mehr Dokumentation
+
+----
+✔ Tastenbelegung "Flasche werfen" --> D
+✔ nicht sterben, wenn vor/im Huhn hochspringen (evtl. fromAbove)
+✔Kollision etwas zu spät
+✔Abstand zwischen Buttons bei Gameover gleichmäßig 
+levelParameters initLevel kürzer

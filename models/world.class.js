@@ -57,10 +57,14 @@ class World {
 
     checkCollisionsWithEnemy() {
         this.selectedLevel.enemies.forEach((enemy) => {
-            if (this.character.isCollidingFromTop(enemy)) {
+            if (this.character.isCollidingFromTop(enemy) && this.character.isFlyingDown()) {
                 this.jumpOnEnemy(enemy, true);
+                this.character.hitable = false;
+                setTimeout(() => {
+                    this.character.hitable = true;
+                }, 1000);
             }
-            else if (this.character.isColliding(enemy)) {
+            else if (this.character.isColliding(enemy) && this.character.hitable) {
                 this.character.hit(5);
                 this.statusBarLive.setPercentage(this.character.energy);
             }
