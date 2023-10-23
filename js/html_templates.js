@@ -27,10 +27,12 @@ function fillGameScreen() {
         
     </div>
 
-    <div class="gameoverScreen" id="gameoverScreen">
-        <div class="puntosPanel" >
-            <div class=puntosText>Puntos:</div>
-            <div id="puntosValueGameover"></div>
+    <div class="levelFinishedScreen" id="gameoverScreen">
+        <div class="puntosPanel flex-column">
+            <div class="puntosPanel2">   
+                <div class=puntosText>Puntos:</div>
+                <div id="puntosValueGameover"></div>
+            </div>
         </div>                
     </div>
 
@@ -46,7 +48,7 @@ function fillGameScreen() {
 `
 }
 
-function fillButton_Points_StartGame() {    
+function fillButton_Points_StartGame() {
     return /*html*/`
     <div class="button-panel" id="button-panel">
         <div class="game-button padding-12-mobile" onclick="openDialog(${getHighscore(1)}, ${getHighscore(2)}, 'dialog');">         <!--getPointsoverview-->
@@ -106,7 +108,7 @@ function fillButton_Points_StartGame() {
             </div>
         </div>
     </div>
-    `    
+    `
 }
 
 function fillButtonsContent() {
@@ -126,10 +128,10 @@ function fillPointsOverview() {
     `
 }
 
-function fillSecondLevelButton(){
+function fillSecondLevelButton() {
     return /*html*/`
     <div onclick="initGame('2'); runEventlisteners();" class="game-button black-background padding-12-mobile">
     Level 2 starten
     </div>
-    `   
+    `
 }

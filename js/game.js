@@ -40,10 +40,13 @@ function showGameover() {
     stopAllSounds();
     stopGame();
     showOnlySignificantScreen('levelFinishedScreen');
-    showScreen('gameoverScreen');
+    switchClass('bodyId', 'gameOverBackground', true);
     hideElement('mobileKeyboard');
-    switchClass('button-panel', 'button-panel', false);
-    switchClass('button-panel', 'd-flex', true);
+    setTimeout(() => {
+        switchClass('bodyId', 'gameOverBackground', false);
+        switchClass('bodyId', 'body-background', true);
+        showScreen('gameoverScreen');        
+    }, 2000);
 }
 
 /**
@@ -59,7 +62,7 @@ function showLevelFinished(levelNumber) {
     if (getTempHighscore(levelNumber) > getHighscore(levelNumber)) {
         setHighscore(getTempHighscore(levelNumber), levelNumber);
     }
-    
+
     showScreen('levelFinishedScreen');
     enableSecondLevel();
     checkSecondLevelButton();
@@ -69,7 +72,7 @@ function showLevelFinished(levelNumber) {
  * 
  * @param {string} screenToHide - when game over then hide fnished screen and vice versa
  */
-function showOnlySignificantScreen(screenToHide){
+function showOnlySignificantScreen(screenToHide) {
     hideElement('canvas');
     hideElement(screenToHide);
     hideElement('switch-sound');
@@ -201,7 +204,7 @@ function enableSecondLevel() {
 /**
  * check in local storage whether the second level is enabled by winning level 1
  */
-function secondLevelEnabled(){
+function secondLevelEnabled() {
     let secondLevellEnabled = localStorage.getItem('secondLevellEnabled');
     let sle = JSON.parse(secondLevellEnabled);
     return sle == 1;
@@ -215,8 +218,8 @@ function checkSecondLevelButton() {
     }
 }
 
-function hideElementAfterTime(obj, time){
-    setTimeout(()=>{
+function hideElementAfterTime(obj, time) {
+    setTimeout(() => {
         hideElement(obj);
     }, time);
 }

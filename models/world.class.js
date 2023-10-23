@@ -144,7 +144,7 @@ class World {
             return obj[obj.indexOf(o)].constructor.name == objName;
         }
         catch {
-            console.log("kein constructor.name");
+            return 0;
         }
     }
 

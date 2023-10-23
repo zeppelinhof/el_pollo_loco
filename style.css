@@ -5,7 +5,7 @@ body {
     /* Für ältere iOS-Versionen (z. B. iOS 10) */
 }
 
-body {
+.body-background {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,7 +15,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     margin: 0;
-    height: 100vh;
+    height: 100vh;    
 }
 
 .disable-selection {
@@ -53,6 +53,8 @@ canvas {
 
 .button-panel-Gameover_Finished {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 12px;
 }
@@ -70,9 +72,19 @@ canvas {
     background-color: black;
 }
 
+.gameOverBackground {
+    width: 100vw;
+    height: calc(100vh - 10px);
+    background-image: url('img/9_intro_outro_screens/game_over/game over!.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 999;
+}
+
 .gameoverScreen {
-    width: 720px;
-    height: 100vh;
+    width: 100vw;
+    height: calc(100vh - 10px);
     background-image: url('img/9_intro_outro_screens/game_over/game over!.png');
     background-size: cover;
     background-position: center;
@@ -295,7 +307,7 @@ canvas {
     background-color: #28518B;
 }
 
-.turnSmartphone{
+.turnSmartphone {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -304,19 +316,19 @@ canvas {
     align-items: center;
     flex-direction: column;
     font-family: 'Arbutus';
-    color: white; 
+    color: white;
     font-size: 24px;
     gap: 50px;
-    background-color: rgba(114, 114, 114, 0.8); 
+    background-color: rgba(114, 114, 114, 0.8);
 }
 
-.textTurnSmartphone{
-    text-align: center; 
+.textTurnSmartphone {
+    text-align: center;
     box-shadow: 0 0 8px 8px rgba(0 0 0 / 30%);
     width: 100vw;
 }
 
-.secondLevelButton{
+.secondLevelButton {
     display: flex;
 }
 
@@ -430,7 +442,7 @@ canvas {
 
 @media (orientation: portrait) {
 
-    .turnSmartphone img { 
+    .turnSmartphone img {
         width: 30vw;
         transform: rotate(-45deg);
         transition: transform 3s;
@@ -440,7 +452,7 @@ canvas {
 /* Stilregeln für den Querformatmodus */
 @media (orientation: landscape) {
 
-    .turnSmartphone{
+    .turnSmartphone {
         display: none;
     }
 }
